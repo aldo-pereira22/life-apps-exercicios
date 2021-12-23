@@ -6,9 +6,9 @@ const AdminController = require('../controllers/AdminController')
 
 router.post('/admin/cadastrar', AdminController.cadastrar)
 router.put('/amdin/editar/:id', AdminController.editar )
-router.delete('admin/excluir/:id', AdminController.excluir )
+router.delete('/admin/excluir/:id', AdminController.excluir )
 
 
-router.get('', AdminController.listar)
+router.get('/', AdminController.listar)
 
 module.exports = router
