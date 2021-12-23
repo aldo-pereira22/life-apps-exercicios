@@ -1,6 +1,8 @@
 const {DataTypes} = require('sequelize')
 const db = require('../db/conn')
 
+const User = require('./User')
+
 const Artigo = db.define('Artigo', {
     titulo: {
         type: DataTypes.STRING,
@@ -20,4 +22,9 @@ const Artigo = db.define('Artigo', {
     }
 
 })
+
+
+Artigo.belongsTo(User)
+User.hasMany(Artigo)
+
 module.exports = Artigo

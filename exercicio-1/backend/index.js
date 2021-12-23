@@ -1,13 +1,15 @@
 const express = require('express')
 const app = express()
-
 const conn = require('./db/conn')
 
 
+// Models
+const Artigo = require('./model/Artigo')
+const User = require('./model/User')
 
-
+const adminRotas = require('./router/adminRotas')
 // Configurações
-// Json
+// Receber dados JSON
 app.use(express.json())
 
 // URL ENCODE
@@ -16,11 +18,14 @@ app.use(
         extended:true
     })
 )
+app.use('/', adminRotas)
+
 
 const porta = 3001
-conn.sync().then( () =>{
-    app.listen(porta, (req, res) => {
-        console.log("Conectado com o banco de dados!")
-    })
+    conn.sync().
+    // conn.sync({force:true}).
+    then( () =>{
 
-}).catch((err) => console.log(err))
+        app.listen(porta)
+    })
+    .catch((err) => console.log(err))
