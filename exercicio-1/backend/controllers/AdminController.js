@@ -1,9 +1,12 @@
 const Artigo = require('../model/Artigo')
 
+
 module.exports = class AdminController{
 
     static async cadastrar(req, res){
+        console.log(req.file)
         const artigoNovo = req.body
+        artigoNovo.imagem = req.file.path
         const artigo = await Artigo.create(artigoNovo)
         res.status(201).send(artigo)
     }
