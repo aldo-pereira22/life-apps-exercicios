@@ -63,7 +63,6 @@ module.exports = class UsuarioController {
         const email = req.body.email
         const senha = req.body.senha
     
-
         const usuario = await Usuario.findOne({where:{email:email}})
 
         if(!usuario){

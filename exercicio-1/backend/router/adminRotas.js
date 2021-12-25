@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
+const login = require('../middleware/login')
+
 
 const storage = multer.diskStorage({
     destination:function(req, file, cb){
@@ -29,11 +31,11 @@ const upload = multer({
 
 const AdminController = require('../controllers/AdminController')
 
-router.post('/admin/cadastrar', (upload.single('imagem')),AdminController.cadastrar)
+router.post('/admin/cadastrar',(upload.single('imagem')),login,AdminController.cadastrar)
 router.put('/admin/editar/:id', AdminController.editar )
 router.get('/admin/buscar/:id', AdminController.buscar)
 router.delete('/admin/excluir/:id', AdminController.excluir )
 
-router.get('/', AdminController.listar)
+router.get('/', AdminController.listar) 
 
 module.exports = router
