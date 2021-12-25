@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize')
 const db = require('../db/conn')
 
-const User = require('./User')
+const User = require('./Usuario')
 
 const Artigo = db.define('Artigo', {
     titulo: {

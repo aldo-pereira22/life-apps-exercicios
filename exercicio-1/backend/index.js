@@ -6,11 +6,12 @@ const cors = require('cors');
 
 // Models
 const Artigo = require('./model/Artigo')
-const User = require('./model/User')
+const Usuario = require('./model/Usuario')
 
 
 // Arquivos de rotas ADM
 const adminRotas = require('./router/adminRotas')
+const usuarioRotas = require('./router/usuarioRotas')
 
 // Configurações
 // Receber dados JSON
@@ -29,6 +30,8 @@ app.use(
         extended:true
     })
 )
+
+app.use('/usuario', usuarioRotas)
 app.use('/', adminRotas)
 
 app.use((req, res, next) => {
