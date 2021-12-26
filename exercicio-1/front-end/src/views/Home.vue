@@ -2,6 +2,7 @@
   <div class="mt-5">
 
           <h1>Artigos</h1>
+          {{artigos}}
       
       <div class="div">
         <!-- {{artigos}} -->
@@ -14,7 +15,6 @@
                 <a href="#" class="btn btn-primary ">Ver artigo </a><br>
                 <a href="#" class="btn btn-alert mt-2">Editar artigo </a> <br>
                 <a href="#" class="btn btn-danger mt-2">Excluir artigo </a>
-
               </div>
             </div>
           </div>
@@ -27,8 +27,7 @@
 
 <script>
 
-import axios from 'axios'
-// antes do VUEX
+import {mapState,mapActions} from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -36,18 +35,24 @@ export default {
   },
   data(){
     return {
-      artigos: {}
+      // artigos: {}
     }
   },
   methods:{
-    getArtigos(){
-      axios.get('http://localhost:3001').then(resp => {
-        this.artigos = resp.data
-      })
-    }
+  //   getArtigos(){
+  //     axios.get('http://localhost:3001').then(resp => {
+  //       this.artigos = resp.data
+  //     })
+  //   }
+  ...mapActions(['getArtigosA'])
+
+  },
+  computed:{
+    ...mapState(['artigos'])
   },
   created() {
-    this.getArtigos();
+    this.getArtigosA();
+    // this.getArtigosA()
   }
 }
 </script>
