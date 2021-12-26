@@ -11,7 +11,8 @@
                 <router-link class="nav-link" to="/">
                     <h3> INICIO </h3>                
                 </router-link>
-                <router-link class="nav-link" to="/about">
+
+                <router-link class="nav-link" to="/cadastro">
                    <h3> CADASTRAR</h3>  
                 </router-link>
                 <!-- <router-link class="nav-link" to="/categorias">

@@ -1,6 +1,7 @@
 <template>
   <div class="mt-5">
-    <h1>Cadastrar</h1>
+    <h1>Cadastro de artigos</h1>
+
 
     <Cadastrar /> 
 

@@ -55,9 +55,12 @@ export default {
 <style scoped>
   .div{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   .card {
+    margin-top: 20px;
     margin-left: 20px;
   }
 </style>
