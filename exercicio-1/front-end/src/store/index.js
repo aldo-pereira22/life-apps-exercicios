@@ -19,18 +19,33 @@ export default new Vuex.Store({
     },
   
     mutations:{
-      getArtigosM(state, payload){
+      
+      listar(state, payload){
             state.artigos = payload
-      }
+      },
+
+      excluir(state, payload){
+        state.artigos = payload
+      } 
+
+
     },
+    
   
     actions:{
-      getArtigosA(context){
+      listar(context){
         axios.get('http://localhost:3001').then(resp => {
           console.log(resp.data)
-          context.commit('getArtigosM', resp.data)
+          context.commit('listar', resp.data)
+        })
+      },
+
+      excluir(context, id){
+        axios.delete('http://localhost:3001/admin/excluir/'+id).then(resp => {
+          context.commit('excluir', resp.data)
         })
       }
+
     }
   
 })

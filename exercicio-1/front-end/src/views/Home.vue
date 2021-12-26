@@ -2,19 +2,23 @@
   <div class="mt-5">
 
           <h1>Artigos</h1>
-          {{artigos}}
+       
+        <!-- {{artigos}} -->
       
       <div class="div">
-        <!-- {{artigos}} -->
           <div v-for="artigo in artigos" :key="artigo.id" >
             <div class="card" style="width: 18rem;">
                 <img src="../assets/img/logo.png" class="card-img-top" alt="Imagem do artigo">
               <div class="card-body">
                 <h5 class="card-title"> {{artigo.titulo}}</h5>
                 <p class="card-text"> <strong> Autor: </strong> {{artigo.nomeAutor}} </p>
-                <a href="#" class="btn btn-primary ">Ver artigo </a><br>
-                <a href="#" class="btn btn-alert mt-2">Editar artigo </a> <br>
-                <a href="#" class="btn btn-danger mt-2">Excluir artigo </a>
+                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Ver</button>
+                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Editar</button>
+
+                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Excluir</button>
+                <!-- <a  v-bind:href ="`http://localhost:3001/admin/excluir/${artigo.id}`" class="btn btn-danger mt-2">Excluir artigo </a> -->
+                
+                
               </div>
             </div>
           </div>
@@ -44,14 +48,25 @@ export default {
   //       this.artigos = resp.data
   //     })
   //   }
-  ...mapActions(['getArtigosA'])
+  ...mapActions(['listar', 'excluir']),
+  async exluirArtigo(id){
+    try {
+      await this.excluir(id)
+      this.listar()
+      this.$router.go()
+    } catch (error) {
+      
+        alert("Nao foi possivel excluir"+error)
+      
+    }
+  }
 
   },
   computed:{
     ...mapState(['artigos'])
   },
   created() {
-    this.getArtigosA();
+    this.listar();
     // this.getArtigosA()
   }
 }
