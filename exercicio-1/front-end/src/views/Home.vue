@@ -28,7 +28,7 @@
 <script>
 
 import axios from 'axios'
-
+// antes do VUEX
 export default {
   name: 'Home',
   components: {
