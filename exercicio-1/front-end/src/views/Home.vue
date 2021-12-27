@@ -12,8 +12,8 @@
               <div class="card-body">
                 <h5 class="card-title"> {{artigo.titulo}}</h5>
                 <p class="card-text"> <strong> Autor: </strong> {{artigo.nomeAutor}} </p>
-                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Ver</button>
-                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Editar</button>
+                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-primary">Ver</button>
+                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-primary ml-3">Editar</button>
 
                 <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Excluir</button>
                 <!-- <a  v-bind:href ="`http://localhost:3001/admin/excluir/${artigo.id}`" class="btn btn-danger mt-2">Excluir artigo </a> -->

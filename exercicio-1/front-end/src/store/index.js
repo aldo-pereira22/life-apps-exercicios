@@ -26,7 +26,11 @@ export default new Vuex.Store({
 
       excluir(state, payload){
         state.artigos = payload
-      } 
+      },
+
+      adicionarArtigo(state, payload){
+        state.artigos = payload
+      }
 
 
     },
@@ -37,6 +41,12 @@ export default new Vuex.Store({
         axios.get('http://localhost:3001').then(resp => {
           console.log(resp.data)
           context.commit('listar', resp.data)
+        })
+      },
+
+      adicionarArtigo(context, payload){
+        axios.post('http://localhost:3001/admin/cadastrar', payload).then((resp)=> {
+          context.commit('adicionarArtigo', resp.data)
         })
       },
 
