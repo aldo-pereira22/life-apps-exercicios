@@ -30,7 +30,11 @@ export default new Vuex.Store({
 
       adicionarArtigo(state, payload){
         state.artigos = payload
+      },
+      buscarArtigo(state, payload){
+        state.artigos = payload
       }
+
 
 
     },
@@ -53,6 +57,11 @@ export default new Vuex.Store({
       excluir(context, id){
         axios.delete('http://localhost:3001/admin/excluir/'+id).then(resp => {
           context.commit('excluir', resp.data)
+        })
+      },
+      buscarArtigo(context, id){
+        axios.get('http://localhost:3001/admin/buscar/'+id).then(resp =>{
+          context.commit('buscarArtigo', resp.data)
         })
       }
 

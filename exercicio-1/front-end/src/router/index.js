@@ -24,6 +24,11 @@ const routes = [
     path: '/categorias',
     name: 'Categorias',
     component: () => import('../views/Categoria.vue')
+  },
+  {
+    path: '/atualizar',
+    name: 'Atualizar',
+    component: () => import('../components/update/Atualizar.vue')
   }
 ]
 

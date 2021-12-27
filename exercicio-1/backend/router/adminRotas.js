@@ -31,7 +31,7 @@ const upload = multer({
 
 const AdminController = require('../controllers/AdminController')
 
-router.post('/admin/cadastrar',login, (upload.single('imagem')),AdminController.cadastrar)
+router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/ (upload.single('imagem')),AdminController.cadastrar)
 router.put('/admin/editar/:id', AdminController.editar )
 router.get('/admin/buscar/:id', AdminController.buscar)
 router.delete('/admin/excluir/:id', AdminController.excluir )
