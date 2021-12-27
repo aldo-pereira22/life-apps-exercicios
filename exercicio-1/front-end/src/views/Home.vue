@@ -13,13 +13,13 @@
                 <h5 class="card-title"><strong> Titulo: </strong>{{artigo.titulo}}</h5>
                 <p class="card-text"> <strong> Autor: </strong>{{artigo.nomeAutor}} </p>
 
-                <router-link to="/cadastro">
+                <router-link class="mr-3" to="/cadastro">
                   <button  class="btn btn-primary">Ver</button>
                 </router-link>
 
                 <!-- <router-link v-bind:to="{ name:'/atualizar', params:{ id:artigo.id }  } " > -->
                 <router-link :to="{ name: 'Atualizar', params: { id: artigo.id  }}">
-                  <button class="btn btn-primary ml-3">Editar</button>
+                  <button class="btn btn-warning mr-3">Editar</button>
                 </router-link>
 
                 <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Excluir</button>

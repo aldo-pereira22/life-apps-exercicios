@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: '/cadastro',
-    name: 'Cadastrar',
+    name: 'Cadastro',
     component: () => import('../views/Cadastrar.vue')
   },
   {
@@ -33,6 +33,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

@@ -1,13 +1,13 @@
 <template>
 <div class="">
 
-  <div id="app" class="container">
-    <Menu />     
-    <hr>
-    <div id="nav">
-    </div>
-    <router-view/>
-  </div>
+        <div id="app" class="container">
+            <Menu />     
+            <hr>
+            <div id="nav">
+            </div>
+            <router-view/>
+        </div>
 </div>
 </template>
 

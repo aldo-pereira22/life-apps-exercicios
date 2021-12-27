@@ -12,9 +12,16 @@ module.exports = class AdminController{
     }
 
     static async buscar(req, res){
-        const id = req.params.id
-        const artigo = await Artigo.findOne({raw:true, where: { id:id }})
-        res.status(200).send(artigo)
+
+        try {
+            const id = req.params.id
+            const artigo = await Artigo.findOne({raw:true, where: { id:id }})
+            res.status(200).send(artigo)            
+        } catch (error) {
+            console.log("\n\n\n\n\n\nERRRROOOO!")
+            console.log(error)
+        }
+        // console.log(artigo)
     }
 
     static async excluir(req, res){

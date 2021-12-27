@@ -1,18 +1,19 @@
 <template>
   <div class="">
+    
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
 
-                <router-link class="nav-link" to="/">
+                <router-link class="nav-link" :to="{name:'Home'}">
                     <h3> <img src="../assets/img/artigo.png" alt=""> </h3>                
                 </router-link>              
 
-                <router-link class="nav-link" to="/">
+                <router-link class="nav-link" :to="{name: 'Home'}">
                     <h3> INICIO </h3>                
                 </router-link>
 
-                <router-link class="nav-link" to="/cadastro">
+                <router-link class="nav-link" :to="{name: 'Cadastro'}">
                    <h3> CADASTRAR</h3>  
                 </router-link>
                 <!-- <router-link class="nav-link" to="/categorias">

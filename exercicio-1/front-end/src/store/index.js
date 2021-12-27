@@ -15,7 +15,8 @@ export default new Vuex.Store({
   // }
   
     state:{
-      artigos:[]
+      artigos:[],
+      artigo:[]
     },
   
     mutations:{
@@ -32,7 +33,7 @@ export default new Vuex.Store({
         state.artigos = payload
       },
       buscarArtigo(state, payload){
-        state.artigos = payload
+        state.artigo = payload
       }
 
 
@@ -59,6 +60,7 @@ export default new Vuex.Store({
           context.commit('excluir', resp.data)
         })
       },
+
       buscarArtigo(context, id){
         axios.get('http://localhost:3001/admin/buscar/'+id).then(resp =>{
           context.commit('buscarArtigo', resp.data)

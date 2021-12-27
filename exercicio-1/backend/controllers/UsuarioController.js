@@ -36,6 +36,7 @@ module.exports = class UsuarioController {
             res.status(404).send("Não foi possível excluir!\nO usuário não foi encontrado ncontrado!")
         }
     }
+    
     static async editar(req, res){
 
         const id = req.params.id

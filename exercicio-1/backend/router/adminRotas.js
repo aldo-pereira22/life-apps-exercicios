@@ -20,6 +20,7 @@ const fileFilter = (req, file, cb) => {
         cb(null, false)
     }
 }
+
 const upload = multer({
     storage:storage,
     limits:{
@@ -35,7 +36,6 @@ router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/ (upload.s
 router.put('/admin/editar/:id', AdminController.editar )
 router.get('/admin/buscar/:id', AdminController.buscar)
 router.delete('/admin/excluir/:id', AdminController.excluir )
-
 router.get('/', AdminController.listar) 
 
 module.exports = router
