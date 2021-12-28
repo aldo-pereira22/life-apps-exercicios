@@ -4,6 +4,7 @@ const Artigo = require('../model/Artigo')
 module.exports = class AdminController{
 
     static async cadastrar(req, res){
+
         console.log(req.file)
         const artigoNovo = req.body
         // artigoNovo.imagem = req.file.path
@@ -36,11 +37,12 @@ module.exports = class AdminController{
         }
     }
     static async editar(req, res){
-
-        const id = req.params.id
+        console.log("VEIO AQUII!!")
+        const id = req.params.id 
         const titulo = req.body.titulo
         const conteudo = req.body.conteudo
-        const imagem = req.body.imagem
+        const nomeAutor = req.body.nomeAutor
+        // const imagem = req.body.imagem
 
         let artigo = await Artigo.findOne({raw:true, where: { id:id }})
         
@@ -48,7 +50,9 @@ module.exports = class AdminController{
 
         artigo.titulo = titulo
         artigo.conteudo = conteudo
-        artigo.imagem = imagem
+        artigo.nomeAutor = nomeAutor
+
+        // artigo.imagem = imagem
 
         await Artigo.update(artigo, {where:{id:id}})
 

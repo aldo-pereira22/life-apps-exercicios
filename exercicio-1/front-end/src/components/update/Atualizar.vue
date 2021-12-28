@@ -28,7 +28,7 @@
                     </div>
                     <div>
 
-                    <button type="button" v-on:click="atualizarArtigo" class="btn btn-warning mt-2">Atualizar</button>
+                    <button type="button" v-on:click="update(artigo)" class="btn btn-warning mt-2">Atualizar</button>
                     </div>
                     <!-- <button type="submit" class="btn btn-warning mt-2">Atualizar</button> -->
 
@@ -48,16 +48,30 @@ export default {
             id:this.$route.params.id
         }
     },
+    methods: {
+        ...mapActions(['buscarArtigo', 'atualizarArtigo']),
+
+        update(artigo){
+            alert("OLÀ")
+            console.log("\nOlá atualizado ")
+            
+            const atualizado = {
+                id: artigo.id,
+                titulo: artigo.titulo,
+                nomeAutor: artigo.nomeAutor,
+                conteudo: artigo.conteudo 
+            }
+
+            this.atualizarArtigo(atualizado)
+
+        },
+        teste(){
+            console.log("teste")
+        }
+    },
+
     computed:{
         ...mapState(['artigo', 'artigos'])
-    },
-    methods: {
-        ...mapActions(['buscarArtigo']),
-        atualizarArtigo(){
-            alert("Atualizar")
-            console.log("atualizando"+this.artigo)
-            // this.router.push("home")
-        }
     },
     created(){
         this.buscarArtigo(this.$route.params.id)

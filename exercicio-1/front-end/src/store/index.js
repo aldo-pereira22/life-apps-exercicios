@@ -32,7 +32,12 @@ export default new Vuex.Store({
       adicionarArtigo(state, payload){
         state.artigos = payload
       },
+
       buscarArtigo(state, payload){
+        state.artigo = payload
+      },
+
+      atualizarArtigo(state, payload){
         state.artigo = payload
       }
 
@@ -64,6 +69,12 @@ export default new Vuex.Store({
       buscarArtigo(context, id){
         axios.get('http://localhost:3001/admin/buscar/'+id).then(resp =>{
           context.commit('buscarArtigo', resp.data)
+        })
+      },
+
+      atualizarArtigo(context, artigo){
+        axios.put('http://localhost:3001/admin/editar/'+artigo.id,artigo).then(resp => {
+          context.commit('atualizarArtigo', resp.data)
         })
       }
 

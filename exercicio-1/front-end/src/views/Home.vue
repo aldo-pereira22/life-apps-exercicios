@@ -22,7 +22,7 @@
                   <button class="btn btn-warning mr-3">Editar</button>
                 </router-link>
 
-                <button v-on:click="exluirArtigo(artigo.id)" class="btn btn-danger">Excluir</button>
+                <button v-on:click="qualquercoisa(artigo.id)" class="btn btn-danger">Excluir</button>
                 <!-- <a  v-bind:href ="`http://localhost:3001/admin/excluir/${artigo.id}`" class="btn btn-danger mt-2">Excluir artigo </a> -->
                 
                 
@@ -56,17 +56,19 @@ export default {
   //     })
   //   }
   ...mapActions(['listar', 'excluir']),
-  async exluirArtigo(id){
-    try {
-      await this.excluir(id)
-      this.listar()
-      this.$router.go()
-    } catch (error) {
-      
-        alert("Nao foi possivel excluir"+error)
-      
+
+    async qualquercoisa(id){
+
+      try {
+        await this.excluir(id)
+        this.listar()
+        this.$router.go()
+      } catch (error) {
+        
+          alert("Nao foi possivel excluir"+error)
+        
+      }
     }
-  }
 
   },
   computed:{
