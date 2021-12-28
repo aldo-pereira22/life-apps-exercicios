@@ -37,15 +37,13 @@ module.exports = class AdminController{
         }
     }
     static async editar(req, res){
-        console.log("VEIO AQUII!!")
-        const id = req.params.id 
+        
+        const id = req.params.id    
         const titulo = req.body.titulo
         const conteudo = req.body.conteudo
         const nomeAutor = req.body.nomeAutor
         // const imagem = req.body.imagem
-
-        let artigo = await Artigo.findOne({raw:true, where: { id:id }})
-        
+        let artigo = await Artigo.findOne({raw:true, where: { id:id }}) 
         // console.log("Titulo: "+ titulo, conteudo, imagem)
 
         artigo.titulo = titulo

@@ -36,7 +36,6 @@ module.exports = class UsuarioController {
             res.status(404).send("Não foi possível excluir!\nO usuário não foi encontrado ncontrado!")
         }
     }
-
     static async editar(req, res){
 
         const id = req.params.id
@@ -45,8 +44,10 @@ module.exports = class UsuarioController {
         const senha = req.body.senha
 
 
-        let usuario = await Usuario.findOne({raw:true, where: { id:id }}) 
-        // console.log("Titulo: "+ titulo, conteudo, imagem)      
+        let usuario = await Usuario.findOne({raw:true, where: { id:id }})
+        
+        // console.log("Titulo: "+ titulo, conteudo, imagem)
+        
         usuario.id = id
         usuario.nome = nome
         usuario.email = email

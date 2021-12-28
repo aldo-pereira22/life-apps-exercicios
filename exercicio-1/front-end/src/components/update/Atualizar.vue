@@ -1,9 +1,6 @@
 <template>
     <div class="main">
         <h2>Atualizar Artigo</h2>
-        <h2>Artigo: {{artigo}}</h2> <hr>
-        <h2>Artigos: {{artigos}}</h2>
-    
         <div>
             <form class="mt-5">
 
@@ -52,17 +49,14 @@ export default {
         ...mapActions(['buscarArtigo', 'atualizarArtigo']),
 
         update(artigo){
-            alert("OLÀ")
-            console.log("\nOlá atualizado ")
-            
-            const atualizado = {
+             const atualizado = {
                 id: artigo.id,
                 titulo: artigo.titulo,
                 nomeAutor: artigo.nomeAutor,
                 conteudo: artigo.conteudo 
             }
-
             this.atualizarArtigo(atualizado)
+            alert("Artigo alterado com sucesso!")
 
         },
         teste(){
