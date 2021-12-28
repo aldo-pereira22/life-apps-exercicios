@@ -5,22 +5,22 @@ module.exports = class AdminController{
 
     static async cadastrar(req, res){
 
-        if(req.file){
-            console.log("NOMEEEEEEEEEEEEEE"+req.file.path)
-            return res.json({
-                erro:false,
-                mensagem:"Upload realizado com sucesso!"
-            })
-        }
+        // if(req.file){
+        //     return res.json({
+        //         erro:false,
+        //         mensagem:"Upload realizado com sucesso!"
+        //     })
+        // }
 
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Upload da imagem não pode ser realizado! Envie uma imagem JPG/JPEG ou PNG"
-        })
+        // return res.status(400).json({
+        //     erro:true,
+        //     mensagem:"Erro: Upload da imagem não pode ser realizado! Envie uma imagem JPG/JPEG ou PNG"
+        // })
         // const artigoNovo = req.body
         // // artigoNovo.imagem = req.file.path
         // const artigo = await Artigo.create(artigoNovo)
         // res.status(201).send(artigo)
+        res.status(201).send("OK")
     }
 
     static async buscar(req, res){

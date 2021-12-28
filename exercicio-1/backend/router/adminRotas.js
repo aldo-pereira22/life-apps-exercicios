@@ -5,9 +5,7 @@ const login = require('../middleware/login')
 // const upload = require('../middleware/uploadImagem')
 
 
-const upload = multer({
-    dest:'./uploads'
-})
+
 
 
 // const storage = multer.diskStorage({
@@ -15,7 +13,7 @@ const upload = multer({
 //         cb(null,'./uploads')
 //     },
 //     filename: function(req, file, cb){
-//         cb(null, "teste")
+//         cb(null, "artigo_"+Date.now().toString()+"_"+file.originalname)
 //     }
 // })
 
@@ -38,7 +36,7 @@ const upload = multer({
 
 const AdminController = require('../controllers/AdminController')
 
-router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/upload.single('imagem'), AdminController.cadastrar)
+router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/ AdminController.cadastrar)
 router.put('/admin/editar/:id', AdminController.editar )
 router.get('/admin/buscar/:id', AdminController.buscar)
 router.delete('/admin/excluir/:id', AdminController.excluir )
