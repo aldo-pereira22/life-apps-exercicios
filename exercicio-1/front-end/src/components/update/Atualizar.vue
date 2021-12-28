@@ -1,6 +1,12 @@
 <template>
     <div class="main">
         <h2>Atualizar Artigo</h2>
+        <div class="alert alert-success" v-if="ok">
+            <h4>Dados atualizados com sucesso!</h4>
+        </div>
+        <div>
+            <h4>{{message}}</h4>
+        </div>
         <div>
             <form class="mt-5">
 
@@ -42,25 +48,36 @@ import { mapState, mapActions} from 'vuex'
 export default {
     data(){
         return {
-            id:this.$route.params.id
+            id:this.$route.params.id,
+            message: '',
+            ok: false
         }
     },
     methods: {
         ...mapActions(['buscarArtigo', 'atualizarArtigo']),
-
-        update(artigo){
+ 
+        async update(artigo){
              const atualizado = {
                 id: artigo.id,
                 titulo: artigo.titulo,
                 nomeAutor: artigo.nomeAutor,
                 conteudo: artigo.conteudo 
             }
-            this.atualizarArtigo(atualizado)
-            alert("Artigo alterado com sucesso!")
-
+            try {
+                await this.atualizarArtigo(atualizado)
+                await this.buscarArtigo(artigo.id)
+                
+            } catch (error) {
+                error.data ? this.message = error.data.message : this.message = "Não foi possível atualizar!"
+            }
+              this.ok = true
+              this.limparMensage()
         },
-        teste(){
-            console.log("teste")
+
+        limparMensage(){
+            setTimeout( ()=> {
+                this.ok = false
+            },3000)
         }
     },
 
