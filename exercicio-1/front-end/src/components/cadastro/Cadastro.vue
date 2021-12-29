@@ -70,7 +70,7 @@
                     }
 
      
-                this.adicionarArtigo(artigo,imagem)
+                this.adicionarArtigo(artigo)
                 this.artigo.titulo = ''
                 this.artigo.conteudo = ''
                 this.artigo.nomeAutor = ''
