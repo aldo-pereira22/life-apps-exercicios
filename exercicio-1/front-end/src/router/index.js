@@ -29,6 +29,11 @@ const routes = [
     path: '/atualizar',
     name: 'Atualizar',
     component: () => import('../components/update/Atualizar.vue')
+  },
+  {
+    path: '/upload',
+    name: 'upload',
+    component: () => import('../components/cadastro/UploadImages')
   }
 ]
 

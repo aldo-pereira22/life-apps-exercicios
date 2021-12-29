@@ -6,6 +6,7 @@ module.exports = class AdminController{
     static async cadastrar(req, res){
 
         const artigoNovo = req.body
+        console.log("\n\n\nArquvo:"+req.file)
         try {
             artigoNovo.imagem = req.file.firebaseUrl
             
@@ -15,7 +16,7 @@ module.exports = class AdminController{
         const artigo = await Artigo.create(artigoNovo)
         res.status(201).send(artigo)
     }
-
+ 
     static async buscar(req, res){
 
         try {

@@ -8,7 +8,8 @@
       <div class="div">
           <div v-for="artigo in artigos" :key="artigo.id" >
             <div class="card" style="width: 18rem;">
-                <img src="../assets/img/logo.png" class="card-img-top" alt="Imagem do artigo">
+                <img :src=artigo.imagem class="card-img-top" alt="Imagem do artigo">
+                <!-- {{artigo.imagem}} -->
               <div class="card-body">
                 <h5 class="card-title"><strong> Titulo: </strong>{{artigo.titulo}}</h5>
                 <p class="card-text"> <strong> Autor: </strong>{{artigo.nomeAutor}} </p>
@@ -24,8 +25,6 @@
 
                 <button v-on:click="qualquercoisa(artigo.id)" class="btn btn-danger">Excluir</button>
                 <!-- <a  v-bind:href ="`http://localhost:3001/admin/excluir/${artigo.id}`" class="btn btn-danger mt-2">Excluir artigo </a> -->
-                
-                
               </div>
             </div>
           </div>
@@ -45,15 +44,11 @@ export default {
   },
   data(){
     return {
-      // artigos: {}
+      
     }
   },
   methods:{
-  //   getArtigos(){
-  //     axios.get('http://localhost:3001').then(resp => {
-  //       this.artigos = resp.data
-  //     })
-  //   }
+ 
   ...mapActions(['listar', 'excluir']),
 
     async qualquercoisa(id){

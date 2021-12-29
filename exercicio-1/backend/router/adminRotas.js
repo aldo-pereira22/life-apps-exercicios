@@ -40,7 +40,7 @@ const Multer = multer({
 
 const AdminController = require('../controllers/AdminController')
 
-router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/ Multer.single("imagem"),uploadimagem,AdminController.cadastrar)
+router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/ Multer.single("imagem"), uploadimagem ,AdminController.cadastrar)
 router.put('/admin/editar/:id', AdminController.editar )
 router.get('/admin/buscar/:id', AdminController.buscar)
 router.delete('/admin/excluir/:id', AdminController.excluir )

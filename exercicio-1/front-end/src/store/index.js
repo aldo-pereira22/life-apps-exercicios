@@ -54,9 +54,10 @@ export default new Vuex.Store({
         })
       },
 
-      adicionarArtigo(context, payload){
-        axios.post('http://localhost:3001/admin/cadastrar', payload).then((resp)=> {
+      adicionarArtigo(context, payload, imagem){
+        axios.post('http://localhost:3001/admin/cadastrar',imagem, payload).then((resp)=> {
           context.commit('adicionarArtigo', resp.data)
+          // return(resp.data)
         })
       },
 
