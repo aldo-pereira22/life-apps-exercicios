@@ -6,11 +6,14 @@ module.exports = class AdminController{
     static async cadastrar(req, res){
 
         const artigoNovo = req.body
-
-        artigoNovo.imagem = req.file.firebaseUrl
+        try {
+            artigoNovo.imagem = req.file.firebaseUrl
+            
+        } catch (error) {
+            console.log("Não foi possível salvar a imagem"+error)
+        }
         const artigo = await Artigo.create(artigoNovo)
         res.status(201).send(artigo)
-        // res.status(201).send("")
     }
 
     static async buscar(req, res){
