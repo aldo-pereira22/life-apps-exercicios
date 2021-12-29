@@ -5,22 +5,12 @@ module.exports = class AdminController{
 
     static async cadastrar(req, res){
 
-        // if(req.file){
-        //     return res.json({
-        //         erro:false,
-        //         mensagem:"Upload realizado com sucesso!"
-        //     })
-        // }
+        const artigoNovo = req.body
 
-        // return res.status(400).json({
-        //     erro:true,
-        //     mensagem:"Erro: Upload da imagem não pode ser realizado! Envie uma imagem JPG/JPEG ou PNG"
-        // })
-        // const artigoNovo = req.body
-        // // artigoNovo.imagem = req.file.path
-        // const artigo = await Artigo.create(artigoNovo)
-        // res.status(201).send(artigo)
-        res.status(201).send("OK")
+        artigoNovo.imagem = req.file.firebaseUrl
+        const artigo = await Artigo.create(artigoNovo)
+        res.status(201).send(artigo)
+        // res.status(201).send("")
     }
 
     static async buscar(req, res){

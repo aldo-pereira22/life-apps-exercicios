@@ -19,7 +19,7 @@ app.use(express.json())
 
 
 // Tornando acessível a pasta Uploads
-app.use('/', express.static('uploads'))
+app.use('/', express.static('./uploads'))
 
 //Cors
 app.use(cors());
