@@ -4,9 +4,8 @@ const Artigo = require('../model/Artigo')
 module.exports = class AdminController{
 
     static async cadastrar(req, res){
-
         const artigoNovo = req.body
-        console.log("\n\n\nArquvo:"+req.file)
+         console.log("\n\n\nArquvo:"+req.file)
         try {
             artigoNovo.imagem = req.file.firebaseUrl
             

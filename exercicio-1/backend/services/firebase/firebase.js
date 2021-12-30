@@ -11,7 +11,6 @@ admin.initializeApp({
 const bucket = admin.storage().bucket()
 
 const uploadImagem = (req, res, next) => {
-    console.log("TESTE\n\n\n\n"+(req))
     if(!req.file) return next()
     const imagem = req.file
     const nomeArquivo = Date.now().toString()+'.'+imagem.originalname.split('.').pop()

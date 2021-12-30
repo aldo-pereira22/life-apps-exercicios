@@ -23,7 +23,6 @@
         <div class="form-group mt-3">
             <label for="img">Escolha a imagem</label> <br>
             <input type="file" name="imagem"  @change="selecionarImagem" id=""  >
-
         </div>
         
         <button type="submit" v-on:click="adicionar" class="btn btn-primary mt-2">Cadastrar</button>
@@ -51,26 +50,23 @@
         methods:{
             ...mapActions(['adicionarArtigo']),
 
+                //Seleciona a imagem do formulário
                 selecionarImagem(e){
                     this.imagemSelecionada = e.target.files[0]
-                    console.log("\n\nARQUIVO"+this.imagemSelecionada+"\n\n\n")
+                    // console.log("\n\nARQUIVO"+this.imagemSelecionada+"\n\n\n")
    
                 },              
 
-                adicionar(artigo){
+                adicionar(){
                   
-                    let imagem = new FormData()
-                    imagem.append('file',this.imagemSelecionada)
-                    console.log(this.imagem)
+                let arquivo = new FormData()
 
-                    artigo = {
-                        titulo:this.artigo.titulo,
-                        conteudo:this.artigo.conteudo,
-                        nomeAutor:this.artigo.nomeAutor,
-                    }
+                arquivo.append('imagem',this.imagemSelecionada)
+                arquivo.append('titulo', this.artigo.titulo)
+                arquivo.append('conteudo', this.artigo.conteudo)
+                arquivo.append('nomeAutor', this.artigo.nomeAutor)
 
-     
-                this.adicionarArtigo(artigo)
+                this.adicionarArtigo(arquivo)
                 this.artigo.titulo = ''
                 this.artigo.conteudo = ''
                 this.artigo.nomeAutor = ''
