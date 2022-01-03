@@ -34,6 +34,11 @@ const routes = [
     path: '/upload',
     name: 'upload',
     component: () => import('../components/cadastro/UploadImages')
+  },
+  {
+    path: '/verArtigo',
+    name: 'VerArtigo',
+    component: () => import('../components/artigo/VerArtigo.vue')
   }
 ]
 
