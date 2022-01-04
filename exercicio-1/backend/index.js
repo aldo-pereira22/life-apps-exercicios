@@ -27,7 +27,7 @@ app.use(cors());
 // URL ENCODE
 app.use(
     express.urlencoded({
-        extended:true
+        extended: true
     })
 )
 
@@ -35,7 +35,7 @@ app.use('/usuario', usuarioRotas)
 app.use('/', adminRotas)
 
 app.use((req, res, next) => {
-    const erro =  new Error("URL não encontrada! Verifique o endereço e tente novamente.")
+    const erro = new Error("URL não encontrada! Verifique o endereço e tente novamente.")
     erro.status = 404
     next(erro)
 })
@@ -44,15 +44,15 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
     res.status(error.status || 500)
     return res.send({
-        erro:{
+        erro: {
             mensagem: error.message
         }
     })
 })
 const porta = 3001
-    conn.sync().
-    // conn.sync({force:true}).
-    then( () =>{
+conn.sync().
+    // conn.sync({ force: true }).
+    then(() => {
 
         app.listen(porta)
     })
