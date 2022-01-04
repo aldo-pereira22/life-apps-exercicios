@@ -1,16 +1,9 @@
 <template>
   <div class="container">
-    <h2>Título:</h2>
-    <h3>{{ artigo.titulo }}</h3>
-    <h2>Autor:</h2>
-    <h3>{{ artigo.nomeAutor }}</h3>
-    <h2>ID:</h2>
-    <h3>{{ artigo.id }}</h3>
-    <h2>Criado em:</h2>
-    <h3>{{ artigo.createdAt }}</h3>
-    <h2>Ultima autalização:</h2>
-    <h3>{{ artigo.updatedAt }}</h3>
-    <div>{{ artigo }}</div>
+    <!-- <img :src="artigo.imagem" alt="" /> -->
+    <div>
+      {{ artigo.conteudo }}
+    </div>
   </div>
 </template>
 
@@ -36,4 +29,11 @@ export default {
  
     
 <style>
+img {
+  width: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 150px;
+}
 </style>

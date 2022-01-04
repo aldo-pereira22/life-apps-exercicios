@@ -25,7 +25,7 @@
               class="mr-3"
               :to="{ name: 'VerArtigo', params: { id: artigo.id } }"
             >
-              <button class="btn btn-primary">Ver</button>
+              <button class="btn btn-primary">Ler Artigo</button>
             </router-link>
 
             <!-- <router-link v-bind:to="{ name:'/atualizar', params:{ id:artigo.id }  } " > -->
@@ -85,5 +85,12 @@ export default {
 .card {
   margin-top: 20px;
   margin-left: 20px;
+}
+img {
+  width: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 150px;
 }
 </style>
