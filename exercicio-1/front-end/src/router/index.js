@@ -16,11 +16,6 @@ const routes = [
     component: () => import('../views/Cadastrar.vue')
   },
   {
-    path: '/produtos',
-    name: 'Produtos',
-    component: () => import('../views/Produtos.vue')
-  },
-  {
     path: '/categorias',
     name: 'Categorias',
     component: () => import('../views/Categoria.vue')
@@ -34,6 +29,11 @@ const routes = [
     path: '/upload',
     name: 'upload',
     component: () => import('../components/cadastro/UploadImages')
+  },
+  {
+    path: '/verArtigo',
+    name: 'verartigo',
+    component: () => import('../components/visualizar/Visualizar')
   }
 ]
 

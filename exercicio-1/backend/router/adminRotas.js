@@ -5,13 +5,13 @@ const login = require('../middleware/login')
 const uploadimagem = require('../services/firebase/firebase')
 
 const Multer = multer({
-    storage:multer.memoryStorage(),
-    limits:1024 * 1024
+    storage: multer.memoryStorage(),
+    limits: 1024 * 1024
 })
 
 
 
- 
+
 // const storage = multer.diskStorage({
 //     destination:function(req, file, cb){
 //         cb(null,'./uploads')
@@ -40,11 +40,11 @@ const Multer = multer({
 
 const AdminController = require('../controllers/AdminController')
 
-router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/ Multer.single("imagem"), uploadimagem ,AdminController.cadastrar)
-router.put('/admin/editar/:id', AdminController.editar )
+router.post('/admin/cadastrar',/*login, Autorização para cadastrar*/ Multer.single("imagem"), uploadimagem, AdminController.cadastrar)
+router.put('/admin/editar/:id', AdminController.editar)
 router.get('/admin/buscar/:id', AdminController.buscar)
-router.delete('/admin/excluir/:id', AdminController.excluir )
+router.delete('/admin/excluir/:id', AdminController.excluir)
 
-router.get('/', AdminController.listar) 
+router.get('/', AdminController.listar)
 
 module.exports = router

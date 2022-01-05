@@ -49,6 +49,7 @@ app.use((error, req, res, next) => {
         }
     })
 })
+
 const porta = 3001
 conn.sync().
     // conn.sync({ force: true }).

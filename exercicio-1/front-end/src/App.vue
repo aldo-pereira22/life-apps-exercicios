@@ -1,34 +1,31 @@
 <template>
-<div class="">
-
-        <div id="app" class="container">
-            <Menu />     
-            <hr>
-            <div id="nav">
-            </div>
-            <router-view/>
-        </div>
-</div>
+  <div class="">
+    <div id="app" class="container">
+      <Menu />
+      <hr />
+      <div id="nav"></div>
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
-import Menu from './components/Menu.vue'
+import Menu from "./components/Menu.vue";
 
-
-  export default {
-    components:{
-      Menu
-    }
-  }
+export default {
+  components: {
+    Menu,
+  },
+};
 </script>
 
 
 <style>
-  /* .container {
-    background-color:#ffff;
-  } */
+img {
+  width: 200px;
+}
 
-  h1 {
-    text-align: center;
-  }
+h1 {
+  text-align: center;
+}
 </style>
