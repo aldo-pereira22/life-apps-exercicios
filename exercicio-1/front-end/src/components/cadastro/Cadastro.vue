@@ -29,14 +29,26 @@
 
       <div class="form-group mt-3">
         <label for="conteudo">Escreva seu artigo</label>
-        <textarea
+
+        <!-- <textarea
           name="conteudo"
           v-model="artigo.conteudo"
           class="form-control mt-1"
           id="conteudo"
           cols="114"
           rows="8"
-        ></textarea>
+        ></textarea> -->
+
+        <textarea
+          name="conteudo"
+          v-model="artigo.conteudo"
+          class="form-control mt-1"
+          cols="114"
+          rows="8"
+          id="editor"
+        >
+        </textarea>
+        <!-- <quill-editor v-model="artigo.conteudo">Editor </quill-editor> -->
       </div>
 
       <div class="form-group mt-3">
@@ -54,6 +66,7 @@
 <script>
 import { mapActions } from "vuex";
 export default {
+  components: {},
   data() {
     return {
       imagemSelecionada: null,
@@ -87,6 +100,10 @@ export default {
       this.artigo.titulo = "";
       this.artigo.conteudo = "";
       this.artigo.nomeAutor = "";
+      setTimeout(() => {
+        alert("Artigo cadastrado!");
+      }, 100);
+      this.$router.push("/");
     },
 
     // imagemSelecionada(event){

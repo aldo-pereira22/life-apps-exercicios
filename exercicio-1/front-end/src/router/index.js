@@ -34,7 +34,9 @@ const routes = [
     path: '/verArtigo',
     name: 'verartigo',
     component: () => import('../components/visualizar/Visualizar')
-  }
+  },
+
+
 ]
 
 const router = new VueRouter({

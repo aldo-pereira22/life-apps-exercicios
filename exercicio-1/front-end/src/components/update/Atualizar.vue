@@ -92,7 +92,9 @@ export default {
       };
       try {
         await this.atualizarArtigo(atualizado);
-        await this.buscarArtigo(artigo.id);
+        // await this.buscarArtigo(artigo.id);
+        alert("Artigo atualizado com sucesso!");
+        this.$router.push("/");
       } catch (error) {
         error.data
           ? (this.message = error.data.message)

@@ -28,4 +28,7 @@ img {
 h1 {
   text-align: center;
 }
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+}
 </style>
