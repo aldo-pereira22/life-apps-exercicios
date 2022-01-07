@@ -3,6 +3,12 @@
     <h2>Cadastrar Artigo</h2>
 
     <form class="mt-5" enctype="multipart/form-data">
+      <p v-if="erros.length">
+    <b>Por favor, corrija o(s) seguinte(s) erro(s):</b>
+    <ul>
+      <li v-for="error in erros" :key="error + 1">{{ error }}</li>
+    </ul>
+  </p>
       <div class="form-group mt-3">
         <label for="titulo">Nome do autor </label>
         <input
@@ -56,7 +62,7 @@
         <input type="file" name="imagem" @change="selecionarImagem" id="" />
       </div>
 
-      <button type="submit" v-on:click="adicionar" class="btn btn-primary mt-2">
+      <button type="submit" v-on:click="verificaFormulario" class="btn btn-primary mt-2">
         Cadastrar
       </button>
     </form>
@@ -65,7 +71,6 @@
 
 <script>
 import { mapActions } from "vuex";
-import verificaFormulario from "../../../src/services/servicesVerificaCampos";
 export default {
   components: {},
   data() {
@@ -86,12 +91,30 @@ export default {
     //Seleciona a imagem do formulário
     selecionarImagem(e) {
       this.imagemSelecionada = e.target.files[0];
-      // console.log("\n\nARQUIVO"+this.imagemSelecionada+"\n\n\n")
+      this.artigo.imagem = this.imagemSelecionada;
+    },
+    verificaFormulario(e) {
+      this.erros = [];
+      if (this.artigo.titulo && this.artigo.conteudo && this.artigo.imagem) {
+        this.adicionar(this.artigo);
+      }
+      if (!this.artigo.titulo) {
+        this.erros.push("O título é obrigatório!");
+      }
+
+      if (!this.artigo.conteudo) {
+        this.erros.push("Conteúdo é obrigatório!");
+      }
+
+      if (!this.artigo.imagem) {
+        this.erros.push("Imagem é obrigatória");
+      }
+      e.preventDefault();
     },
 
     adicionar() {
       let arquivo = new FormData();
-      this.erros = verificaFormulario(this.artigo);
+
       console.log(this.erros);
 
       arquivo.append("imagem", this.imagemSelecionada);
@@ -110,9 +133,9 @@ export default {
       this.$router.push("/");
     },
 
-    // imagemSelecionada(event){
-    //     this.imgArtigo = event.target.files
-    // }
+    // imagemSelecionada(event) {
+    //   this.imgArtigo = event.target.files;
+    // },
   },
 };
 </script>

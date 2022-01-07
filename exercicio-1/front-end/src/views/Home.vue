@@ -4,7 +4,7 @@
 
     <!-- {{artigos}} -->
 
-    <div class="div">
+    <div v-if="artigos.length >= 1" class="container">
       <div v-for="artigo in artigos" :key="artigo.id">
         <div class="card" style="width: 18rem">
           <img
@@ -44,6 +44,12 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="container" v-else>
+      Ainda não há Artigos cadastrados!
+      <router-link :to="{ name: 'Cadastro' }">
+        <button class="btn btn-primary mr-3">Cadastrar</button>
+      </router-link>
     </div>
   </div>
 </template>
