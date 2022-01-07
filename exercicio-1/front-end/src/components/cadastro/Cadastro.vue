@@ -65,12 +65,13 @@
 
 <script>
 import { mapActions } from "vuex";
+import verificaFormulario from "../../../src/services/servicesVerificaCampos";
 export default {
   components: {},
   data() {
     return {
       imagemSelecionada: null,
-
+      erros: [],
       artigo: {
         titulo: "",
         conteudo: "",
@@ -90,6 +91,8 @@ export default {
 
     adicionar() {
       let arquivo = new FormData();
+      this.erros = verificaFormulario(this.artigo);
+      console.log(this.erros);
 
       arquivo.append("imagem", this.imagemSelecionada);
       arquivo.append("titulo", this.artigo.titulo);
@@ -100,6 +103,7 @@ export default {
       this.artigo.titulo = "";
       this.artigo.conteudo = "";
       this.artigo.nomeAutor = "";
+
       setTimeout(() => {
         alert("Artigo cadastrado!");
       }, 100);

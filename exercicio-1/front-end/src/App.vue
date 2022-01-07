@@ -28,7 +28,7 @@ img {
 h1 {
   text-align: center;
 }
-#app {
+/* #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-}
+} */
 </style>

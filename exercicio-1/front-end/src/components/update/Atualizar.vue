@@ -59,10 +59,16 @@
           <button
             type="button"
             v-on:click="update(artigo)"
-            class="btn btn-warning mt-2"
+            class="btn btn-warning mt-2 mr-3"
           >
             Atualizar
           </button>
+
+          <router-link to="/">
+            <button type="button" class="btn btn-primary ml-2 mt-2">
+              Voltar
+            </button>
+          </router-link>
         </div>
         <!-- <button type="submit" class="btn btn-warning mt-2">Atualizar</button> -->
       </form>
