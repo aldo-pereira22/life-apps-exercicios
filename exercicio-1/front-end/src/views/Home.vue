@@ -4,7 +4,7 @@
 
     <!-- {{artigos}} -->
 
-    <div v-if="artigos.length >= 1" class="container">
+    <div v-if="this.artigos.length >= 1" class="">
       <div v-for="artigo in artigos" :key="artigo.id">
         <div class="card" style="width: 18rem">
           <img
@@ -34,10 +34,7 @@
               <button class="btn btn-warning mr-3">Editar</button>
             </router-link>
 
-            <button
-              v-on:click="qualquercoisa(artigo.id)"
-              class="btn btn-danger"
-            >
+            <button v-on:click="deletar(artigo.id)" class="btn btn-danger">
               Excluir
             </button>
             <!-- <a  v-bind:href ="`http://localhost:3001/admin/excluir/${artigo.id}`" class="btn btn-danger mt-2">Excluir artigo </a> -->
@@ -46,7 +43,9 @@
       </div>
     </div>
     <div class="container" v-else>
-      Ainda não há Artigos cadastrados!
+      <div class="alert alert-primary" role="alert">
+        Ainda não há Artigos cadastrados
+      </div>
       <router-link :to="{ name: 'Cadastro' }">
         <button class="btn btn-primary mr-3">Cadastrar</button>
       </router-link>
@@ -65,7 +64,7 @@ export default {
   methods: {
     ...mapActions(["listar", "excluir"]),
 
-    async qualquercoisa(id) {
+    async deletar(id) {
       try {
         await this.excluir(id);
         this.listar();
@@ -86,11 +85,10 @@ export default {
 </script>
 
 <style scoped>
-.div {
+/* .div {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
-}
+} */
 
 .card {
   margin-top: 20px;

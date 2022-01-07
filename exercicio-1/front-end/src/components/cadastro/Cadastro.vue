@@ -3,12 +3,23 @@
     <h2>Cadastrar Artigo</h2>
 
     <form class="mt-5" enctype="multipart/form-data">
-      <p v-if="erros.length">
-    <b>Por favor, corrija o(s) seguinte(s) erro(s):</b>
-    <ul>
-      <li v-for="error in erros" :key="error + 1">{{ error }}</li>
-    </ul>
-  </p>
+      <div class="warning" v-if="erros.length">
+        <div class="alert alert-primary" role="alert">
+          Por favor, verifique o(s) seguinte(s) capmos(s)
+        </div>
+        <ul class="list-group">
+          <li
+            class="list-group-item list-group-item-danger"
+            v-for="error in erros"
+            :key="error + 1"
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div class="alert alert-primary" role="alert" v-if="mostrar">
+        Artigo cadastrado com sucesso!
+      </div>
       <div class="form-group mt-3">
         <label for="titulo">Nome do autor </label>
         <input
@@ -62,7 +73,7 @@
         <input type="file" name="imagem" @change="selecionarImagem" id="" />
       </div>
 
-      <button type="submit" v-on:click="verificaFormulario" class="btn btn-primary mt-2">
+      <button type="submit" v-on:click="cadastrar" class="btn btn-primary mt-2">
         Cadastrar
       </button>
     </form>
@@ -75,6 +86,7 @@ export default {
   components: {},
   data() {
     return {
+      mostrar: false,
       imagemSelecionada: null,
       erros: [],
       artigo: {
@@ -86,18 +98,47 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["adicionarArtigo"]),
+    ...mapActions(["cadastrarArtigo", "listar"]),
+
+    limparCampos() {
+      this.artigo.titulo = "";
+      this.artigo.conteudo = "";
+      this.artigo.nomeAutor = "";
+      // this.erros = [];
+    },
 
     //Seleciona a imagem do formulário
     selecionarImagem(e) {
       this.imagemSelecionada = e.target.files[0];
       this.artigo.imagem = this.imagemSelecionada;
     },
-    verificaFormulario(e) {
+    // verificaFormulario(e) {
+    //   this.erros = [];
+    //   if (this.artigo.titulo && this.artigo.conteudo && this.artigo.imagem) {
+    //     this.cadastrar(this.artigo);
+    //     this.mostrar = true;
+    //     setTimeout(() => {
+    //       this.mostrar = false;
+    //     }, 4000);
+    //   }
+    //   if (!this.artigo.titulo) {
+    //     this.erros.push("O título é obrigatório!");
+    //   }
+
+    //   if (!this.artigo.conteudo) {
+    //     this.erros.push("Conteúdo é obrigatório!");
+    //   }
+
+    //   if (!this.artigo.imagem) {
+    //     this.erros.push("Imagem é obrigatória");
+    //   }
+
+    //   e.preventDefault();
+    // },
+    verificaFormulario() {
       this.erros = [];
-      if (this.artigo.titulo && this.artigo.conteudo && this.artigo.imagem) {
-        this.adicionar(this.artigo);
-      }
+      // if (this.artigo.titulo && this.artigo.conteudo && this.artigo.imagem) {
+      // }
       if (!this.artigo.titulo) {
         this.erros.push("O título é obrigatório!");
       }
@@ -108,29 +149,33 @@ export default {
 
       if (!this.artigo.imagem) {
         this.erros.push("Imagem é obrigatória");
+      } else {
+        return true;
       }
-      e.preventDefault();
     },
 
-    adicionar() {
-      let arquivo = new FormData();
+    cadastrar(e) {
+      this.erros = [];
+      if (!this.artigo.titulo) {
+        this.erros.push("O título é obrigatório!");
+      }
 
-      console.log(this.erros);
+      if (!this.artigo.conteudo) {
+        this.erros.push("Conteúdo é obrigatório!");
+      }
 
-      arquivo.append("imagem", this.imagemSelecionada);
-      arquivo.append("titulo", this.artigo.titulo);
-      arquivo.append("conteudo", this.artigo.conteudo);
-      arquivo.append("nomeAutor", this.artigo.nomeAutor);
-
-      this.adicionarArtigo(arquivo);
-      this.artigo.titulo = "";
-      this.artigo.conteudo = "";
-      this.artigo.nomeAutor = "";
-
-      setTimeout(() => {
-        alert("Artigo cadastrado!");
-      }, 100);
-      this.$router.push("/");
+      if (!this.artigo.imagem) {
+        this.erros.push("Imagem é obrigatória");
+      } else {
+        let arquivo = new FormData();
+        arquivo.append("imagem", this.imagemSelecionada);
+        arquivo.append("titulo", this.artigo.titulo);
+        arquivo.append("conteudo", this.artigo.conteudo);
+        arquivo.append("nomeAutor", this.artigo.nomeAutor);
+        this.cadastrarArtigo(arquivo);
+        this.mostrar = true;
+      }
+      e.preventDefault();
     },
 
     // imagemSelecionada(event) {

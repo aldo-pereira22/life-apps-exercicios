@@ -29,7 +29,7 @@ export default new Vuex.Store({
       state.artigos = payload
     },
 
-    adicionarArtigo(state, payload) {
+    cadastrarArtigo(state, payload) {
       state.artigos = payload
     },
 
@@ -54,7 +54,7 @@ export default new Vuex.Store({
       })
     },
 
-    adicionarArtigo(context, payload) {
+    cadastrarArtigo(context, payload) {
       axios.post('http://localhost:3001/admin/cadastrar', payload).then((resp) => {
         context.commit('adicionarArtigo', resp.data)
         // return(resp.data)
