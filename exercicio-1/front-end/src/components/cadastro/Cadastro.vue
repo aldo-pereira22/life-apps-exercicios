@@ -70,7 +70,7 @@
 
       <div class="form-group mt-3">
         <label for="img">Escolha a imagem</label> <br />
-        <input type="file" name="imagem" @change="selecionarImagem" id="" />
+        <input type="file" name="imagem" @change="selecionarImagem" id="img" />
       </div>
 
       <button type="submit" v-on:click="cadastrar" class="btn btn-primary mt-2">
@@ -104,7 +104,8 @@ export default {
       this.artigo.titulo = "";
       this.artigo.conteudo = "";
       this.artigo.nomeAutor = "";
-      // this.erros = [];
+      this.artigo.imagem = null;
+      document.querySelector("#img").value = null;
     },
 
     //Seleciona a imagem do formulário
@@ -112,50 +113,10 @@ export default {
       this.imagemSelecionada = e.target.files[0];
       this.artigo.imagem = this.imagemSelecionada;
     },
-    // verificaFormulario(e) {
-    //   this.erros = [];
-    //   if (this.artigo.titulo && this.artigo.conteudo && this.artigo.imagem) {
-    //     this.cadastrar(this.artigo);
-    //     this.mostrar = true;
-    //     setTimeout(() => {
-    //       this.mostrar = false;
-    //     }, 4000);
-    //   }
-    //   if (!this.artigo.titulo) {
-    //     this.erros.push("O título é obrigatório!");
-    //   }
-
-    //   if (!this.artigo.conteudo) {
-    //     this.erros.push("Conteúdo é obrigatório!");
-    //   }
-
-    //   if (!this.artigo.imagem) {
-    //     this.erros.push("Imagem é obrigatória");
-    //   }
-
-    //   e.preventDefault();
-    // },
-    verificaFormulario() {
-      this.erros = [];
-      // if (this.artigo.titulo && this.artigo.conteudo && this.artigo.imagem) {
-      // }
-      if (!this.artigo.titulo) {
-        this.erros.push("O título é obrigatório!");
-      }
-
-      if (!this.artigo.conteudo) {
-        this.erros.push("Conteúdo é obrigatório!");
-      }
-
-      if (!this.artigo.imagem) {
-        this.erros.push("Imagem é obrigatória");
-      } else {
-        return true;
-      }
-    },
 
     cadastrar(e) {
       this.erros = [];
+      this.mostrar = false;
       if (!this.artigo.titulo) {
         this.erros.push("O título é obrigatório!");
       }
@@ -174,7 +135,12 @@ export default {
         arquivo.append("nomeAutor", this.artigo.nomeAutor);
         this.cadastrarArtigo(arquivo);
         this.mostrar = true;
+        this.limparCampos();
+        setInterval(() => {
+          this.mostrar = false;
+        }, 4000);
       }
+
       e.preventDefault();
     },
 

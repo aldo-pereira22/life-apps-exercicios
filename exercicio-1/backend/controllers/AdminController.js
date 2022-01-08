@@ -22,12 +22,11 @@ module.exports = class AdminController {
             const artigo = await Artigo.findOne({ raw: true, where: { id: id } })
             let data = new Date();
 
-            // artigo.updatedAt = data.toLocaleDateString(artigo.updatedAt)
-            // artigo.createdAt = data.toLocaleDateString(artigo.createdAt)
+            artigo.updatedAt = (new Intl.DateTimeFormat('pt-br',
+                { hour: 'numeric', minute: 'numeric', timeZoneName: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(artigo.updatedAt))
 
-            // artigo.updatedAt = (new Intl.DateTimeFormat('pt-br', { day: 'numeric', month: 'short', year: 'numeric' }).format(artigo.updatedAt))
-            artigo.updatedAt = (new Intl.DateTimeFormat('pt-br', { hour: 'numeric', minute: 'numeric', timeZoneName: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(artigo.updatedAt))
-            artigo.createdAt = (new Intl.DateTimeFormat('pt-br', { hour: 'numeric', minute: 'numeric', timeZoneName: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(artigo.createdAt))
+            artigo.createdAt = (new Intl.DateTimeFormat('pt-br',
+                { hour: 'numeric', minute: 'numeric', timeZoneName: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(artigo.createdAt))
 
 
             console.log("\n\n\nDATA: " + artigo.updatedAt + "\n\n\n")
@@ -52,22 +51,26 @@ module.exports = class AdminController {
         }
     }
     static async editar(req, res) {
+        const artigoEditado = req.body
+        console.log("\n\n\n\n\nARTIGO.ID" + artigoEditado.id)
+        try {
+            artigoEditado.imagem = req.file.firebaseUrl
+        } catch (error) {
+            console.log("Não foi possível salvar a imagem" + error)
+        }
 
-        const id = req.params.id
-        const titulo = req.body.titulo
-        const conteudo = req.body.conteudo
-        const nomeAutor = req.body.nomeAutor
-        // const imagem = req.body.imagem
-        let artigo = await Artigo.findOne({ raw: true, where: { id: id } })
-        // console.log("Titulo: "+ titulo, conteudo, imagem)
+        let artigo = await Artigo.findOne({ raw: true, where: { id: artigoEditado.id } })
+        artigo.titulo = artigoEditado.titulo
+        artigo.conteudo = artigoEditado.conteudo
+        artigo.nomeAutor = artigoEditado.nomeAutor
+        console.log("\n\n\n\n\nARTIGO.ID" + artigo.id)
 
-        artigo.titulo = titulo
-        artigo.conteudo = conteudo
-        artigo.nomeAutor = nomeAutor
 
-        // artigo.imagem = imagem
-
+        artigoEditado.imagem ? artigo.imagem = artigoEditado.imagem : null
+        const id = artigo.id
         await Artigo.update(artigo, { where: { id: id } })
+
+
 
         res.status(200).send()
     }

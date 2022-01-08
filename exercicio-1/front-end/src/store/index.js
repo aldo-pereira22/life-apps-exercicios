@@ -36,7 +36,6 @@ export default new Vuex.Store({
     buscarArtigo(state, payload) {
       state.artigo = payload
     },
-
     atualizarArtigo(state, payload) {
       state.artigo = payload
     }
@@ -56,7 +55,7 @@ export default new Vuex.Store({
 
     cadastrarArtigo(context, payload) {
       axios.post('http://localhost:3001/admin/cadastrar', payload).then((resp) => {
-        context.commit('adicionarArtigo', resp.data)
+        context.commit('cadastrarArtigo', resp.data)
         // return(resp.data)
       })
     },
@@ -73,8 +72,8 @@ export default new Vuex.Store({
       })
     },
 
-    atualizarArtigo(context, artigo) {
-      axios.put('http://localhost:3001/admin/editar/' + artigo.id, artigo).then(resp => {
+    atualizarArtigo(context, payload) {
+      axios.put('http://localhost:3001/admin/editar/', payload).then(resp => {
         context.commit('atualizarArtigo', resp.data)
       })
     }
