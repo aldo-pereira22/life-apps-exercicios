@@ -9,24 +9,44 @@
         <router-link class="nav-link" :to="{ name: 'Home' }">
           <h3>INICIO</h3>
         </router-link>
-
-        <router-link class="nav-link" :to="{ name: 'Cadastro' }">
+        <div>
+          <div>
+            <router-link :to="{ name: 'Login' }">
+              <button type="button" class="btn btn-primary btn-sm mt-5">
+                Login
+              </button>
+            </router-link>
+          </div>
+          <div>
+            <router-link :to="{ name: 'Home' }"
+              ><button type="button" class="btn btn-success btn-sm">
+                Registrar
+              </button></router-link
+            >
+          </div>
+        </div>
+        <!-- <router-link class="nav-link" :to="{ name: 'Cadastro' }">
           <h3>CADASTRAR</h3>
-        </router-link>
-        <!-- <router-link class="nav-link" to="/categorias">
-                      <h3> CATEGORIAS </h3>                
-                </router-link> -->
-
-        <!-- <router-link class="nav-link" to="/produtos">
-                  <h3> PRODUTOS </h3>                  
-                </router-link> -->
+        </router-link> -->
       </div>
     </nav>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+
+export default {
+  data() {
+    return {
+      ...mapState(["logado"]),
+    };
+  },
+
+  created() {
+    // this.teste = this.logado;
+  },
+};
 </script>
 
 <style  scoped>

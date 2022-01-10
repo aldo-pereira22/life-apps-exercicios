@@ -16,7 +16,8 @@ export default new Vuex.Store({
 
   state: {
     artigos: [],
-    artigo: []
+    artigo: [],
+    logado: true,
   },
 
   mutations: {
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     atualizarArtigo(state, payload) {
       state.artigo = payload
+    },
+    logar(state, payload) {
+      state.logado = payload
     }
 
 

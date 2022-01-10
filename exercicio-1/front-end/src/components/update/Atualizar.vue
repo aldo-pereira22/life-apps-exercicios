@@ -22,6 +22,7 @@
       <form class="mt-5">
         <div class="form-group">
           <img
+            id="img"
             v-if="artigo.imagem"
             :src="artigo.imagem"
             class="card-img-top"
@@ -115,53 +116,9 @@ export default {
     },
     selecionarImagem(e) {
       this.imagemSelecionada = e.target.files[0];
-      // this.artigo.imagem = this.imagemSelecionada;
     },
 
-    // async update(artigo) {
-    //   this.mostrar = false;
-    //   this.erros = [];
-    //   const atualizado = {
-    //     id: artigo.id,
-    //     titulo: artigo.titulo,
-    //     nomeAutor: artigo.nomeAutor,
-    //     conteudo: artigo.conteudo,
-    //   };
-    //   try {
-    //     await this.atualizarArtigo(atualizado);
-    //     // await this.buscarArtigo(artigo.id);
-    //     alert("Artigo atualizado com sucesso!");
-    //     this.$router.push("/");
-    //   } catch (error) {
-    //     error.data
-    //       ? (this.message = error.data.message)
-    //       : (this.message = "Não foi possível atualizar!");
-    //   }
-    //   e.preventDefault();
-
-    //   this.ok = true;
-    //   this.limparMensage();
-    // },
-
     update(e) {
-      // this.erros = [];
-      // this.mostrar = false;
-      // if (!this.artigo.titulo) {
-      //   this.erros.push("O título é obrigatório!");
-      // }
-
-      // if (!this.artigo.conteudo) {
-      //   this.erros.push("Conteúdo é obrigatório!");
-      // } else {
-      //   try {
-      //     this.atualizarArtigo(this.artigo);
-      //     this.$router.push("/");
-      //   } catch (error) {
-      //     error.data;
-      //     // ? (this.message = error.data.message)
-      //     // : (this.message = "Não foi possível atualizar!");
-      //   }
-      // }
       this.erros = [];
       this.mostrar = false;
       if (!this.artigo.titulo) {
@@ -206,6 +163,9 @@ export default {
 
 <style>
 img {
+  width: 300px;
+}
+#id {
   width: 300px;
 }
 </style>

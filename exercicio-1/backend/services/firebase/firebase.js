@@ -5,19 +5,25 @@ const { set } = require("../../db/conn");
 
 const BUCKET = 'exercicio1-lifeapps.appspot.com'
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: BUCKET
+    credential: admin.credential.cert(serviceAccount),
+    storageBucket: BUCKET
 });
+
 const bucket = admin.storage().bucket()
 
+const excluir = (img) => {
+    const bucket = admin.storage().bucket();
+    bucket.deleteFiles({ prefix: img })
+
+}
 const uploadImagem = (req, res, next) => {
-    if(!req.file) return next()
+    if (!req.file) return next()
     const imagem = req.file
-    const nomeArquivo = Date.now().toString()+'.'+imagem.originalname.split('.').pop()
-    const file =bucket.file(nomeArquivo)
+    const nomeArquivo = Date.now().toString() + '.' + imagem.originalname.split('.').pop()
+    const file = bucket.file(nomeArquivo)
 
     const stream = file.createWriteStream({
-        metadata:{
+        metadata: {
             contentType: imagem.mimetype
         }
     })
@@ -39,3 +45,10 @@ const uploadImagem = (req, res, next) => {
 
 
 module.exports = uploadImagem
+// module.exports = excluir
+
+// exports.excluirImagem = (img) => {
+//     const bucket = admin.storage().bucket();
+//     bucket.deleteFiles({ prefix: img })
+
+// }

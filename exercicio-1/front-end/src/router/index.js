@@ -35,6 +35,11 @@ const routes = [
     name: 'verartigo',
     component: () => import('../components/visualizar/Visualizar')
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../components/login/Login')
+  },
 
 
 ]

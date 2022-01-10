@@ -37,17 +37,21 @@ module.exports = class UsuarioController {
     }
 
     static async editar(req, res) {
-        const id = req.params.id
+
+        const id = req.body.id
         const nome = req.body.nome
-        const email = req.body.email
         const senha = req.body.senha
+
         let usuario = await Usuario.findOne({ raw: true, where: { id: id } })
 
-        usuario.id = id
-        usuario.nome = nome
-        usuario.email = email
-        usuario.senha = senha
-        await Usuario.update(usuario, { where: { id: id } })
+        bcrypt.hash(senha, 10, async (error, hash) => {
+            if (error) {
+                return res.status(500).send({ error: error })
+            }
+            usuario.senha = hash
+            usuario.nome = nome
+            await Usuario.update(usuario, { where: { id: id } })
+        })
 
         res.status(200).send()
     }

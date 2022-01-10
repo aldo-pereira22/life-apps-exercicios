@@ -1,6 +1,11 @@
 <template>
   <div class="mt-5">
-    <h1>Artigos</h1>
+    <div v-if="this.artigos.length >= 1" class="text-center">
+      <router-link :to="{ name: 'Cadastro' }">
+        <button class="btn btn-success mr-3">Novo Artigo</button>
+      </router-link>
+    </div>
+    <!-- <h1>Artigos</h1> -->
 
     <!-- {{artigos}} -->
 
