@@ -49,6 +49,9 @@ export default new Vuex.Store({
     cadastrarUsuario(state, payload) {
       state.usuario = payload
     },
+    testeLogar(state, payload) {
+      state.logado = payload
+    }
 
 
   },
@@ -93,6 +96,9 @@ export default new Vuex.Store({
         context.commit('cadastrarUsuario', resp.data)
         // return(resp.data)
       })
+    },
+    testeLogar(context, payload) {
+      context.commit('testeLogar', payload)
     },
 
   },

@@ -1,10 +1,13 @@
 <template>
   <div class="mt-5">
     <div v-if="this.artigos.length >= 1" class="text-center">
-      <router-link :to="{ name: 'Cadastro' }">
+      <router-link v-if="logado" :to="{ name: 'Cadastro' }">
         <button class="btn btn-success mr-3">Novo Artigo</button>
       </router-link>
     </div>
+    <button type="submit" v-on:click="mostrar()" class="btn btn-primary mt-2">
+      mostrar
+    </button>
     <!-- <h1>Artigos</h1> -->
 
     <!-- {{artigos}} -->
@@ -64,10 +67,15 @@ export default {
   name: "Home",
   components: {},
   data() {
-    return {};
+    return {
+      // logado: false,
+    };
   },
   methods: {
     ...mapActions(["listar", "excluir"]),
+    mostrar() {
+      this.$store.dispatch("testeLogar", false);
+    },
 
     async deletar(id) {
       try {
@@ -81,6 +89,9 @@ export default {
   },
   computed: {
     ...mapState(["artigos"]),
+    logado() {
+      return this.$store.state.logado;
+    },
   },
   created() {
     this.listar();

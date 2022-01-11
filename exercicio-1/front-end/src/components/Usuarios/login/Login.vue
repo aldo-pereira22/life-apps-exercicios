@@ -24,7 +24,9 @@
         />
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary mt-2">Acessar</button>
+        <button type="submit" v-on:click="logar" class="btn btn-primary mt-2">
+          Acessar
+        </button>
       </div>
     </form>
   </div>

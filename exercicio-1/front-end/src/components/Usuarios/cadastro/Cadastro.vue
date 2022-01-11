@@ -17,6 +17,13 @@
       </div>
       <div class="alert alert-success" role="alert" v-if="mostrar">
         Usuário Cadastrado com sucesso!
+        <button
+          type="button"
+          v-on:click="this.mostrar = false"
+          class="btn btn-success btn-sm"
+        >
+          Ok
+        </button>
       </div>
       <div class="card-header">
         <h2>Cadastro de Usuário!</h2>
@@ -104,8 +111,8 @@ export default {
     limparFormulario() {
       this.usuario.nome = "";
       this.usuario.email = "";
-      this.usuario.senha1 = "";
-      this.usuario.senha2 = "";
+      this.senha1 = "";
+      this.senha2 = "";
     },
 
     cadastrar(e) {
@@ -126,6 +133,7 @@ export default {
         this.cadastrarUsuario(this.usuario);
 
         this.mostrar = true;
+        this.limparFormulario();
       }
 
       e.preventDefault();
