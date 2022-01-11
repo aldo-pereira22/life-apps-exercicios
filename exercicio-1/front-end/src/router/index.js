@@ -38,7 +38,12 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../components/login/Login')
+    component: () => import('../components/Usuarios/login/Login')
+  },
+  {
+    path: '/cadastrarUsuario',
+    name: 'CadastrarUsuario',
+    component: () => import('../components/Usuarios/cadastro/Cadastro')
   },
 
 

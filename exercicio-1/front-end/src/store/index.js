@@ -18,10 +18,12 @@ export default new Vuex.Store({
     artigos: [],
     artigo: [],
     logado: true,
+    usuario: []
   },
 
   mutations: {
 
+    // Artigos
     listar(state, payload) {
       state.artigos = payload
     },
@@ -42,14 +44,18 @@ export default new Vuex.Store({
     },
     logar(state, payload) {
       state.logado = payload
-    }
-
+    },
+    // Usuários
+    cadastrarUsuario(state, payload) {
+      state.usuario = payload
+    },
 
 
   },
 
 
   actions: {
+    // Artigos
     listar(context) {
       axios.get('http://localhost:3001').then(resp => {
         console.log(resp.data)
@@ -80,9 +86,20 @@ export default new Vuex.Store({
       axios.put('http://localhost:3001/admin/editar/', payload).then(resp => {
         context.commit('atualizarArtigo', resp.data)
       })
-    }
+    },
 
-  }
+    cadastrarUsuario(context, payload) {
+      axios.post('http://localhost:3001/usuario/cadastrar', payload).then((resp) => {
+        context.commit('cadastrarUsuario', resp.data)
+        // return(resp.data)
+      })
+    },
+
+  },
+
+
+  // Usuários
+
 
 })
 

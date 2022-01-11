@@ -18,7 +18,7 @@
             </router-link>
           </div>
           <div>
-            <router-link :to="{ name: 'Home' }"
+            <router-link :to="{ name: 'CadastrarUsuario' }"
               ><button type="button" class="btn btn-success btn-sm">
                 Registrar
               </button></router-link

@@ -17,7 +17,7 @@
           </li>
         </ul>
       </div>
-      <div class="alert alert-primary" role="alert" v-if="mostrar">
+      <div class="alert alert-success" role="alert" v-if="mostrar">
         Artigo cadastrado com sucesso!
       </div>
       <div class="form-group mt-3">
