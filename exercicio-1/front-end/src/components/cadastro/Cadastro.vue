@@ -21,18 +21,6 @@
         Artigo cadastrado com sucesso!
       </div>
       <div class="form-group mt-3">
-        <label for="titulo">Nome do autor </label>
-        <input
-          type="text"
-          v-model="artigo.nomeAutor"
-          class="form-control"
-          id="titulo"
-          name="autor"
-          placeholder="Digite o título do artigo"
-        />
-      </div>
-
-      <div class="form-group mt-3">
         <label for="titulo">Título do artigo</label>
         <input
           type="text"
@@ -65,7 +53,6 @@
           id="editor"
         >
         </textarea>
-        <!-- <quill-editor v-model="artigo.conteudo">Editor </quill-editor> -->
       </div>
 
       <div class="form-group mt-3">
@@ -81,7 +68,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   components: {},
   data() {
@@ -92,7 +79,6 @@ export default {
       artigo: {
         titulo: "",
         conteudo: "",
-        nomeAutor: "",
         imagem: "",
       },
     };
@@ -103,7 +89,6 @@ export default {
     limparCampos() {
       this.artigo.titulo = "";
       this.artigo.conteudo = "";
-      this.artigo.nomeAutor = "";
       this.artigo.imagem = null;
       document.querySelector("#img").value = null;
     },
@@ -132,7 +117,7 @@ export default {
         arquivo.append("imagem", this.imagemSelecionada);
         arquivo.append("titulo", this.artigo.titulo);
         arquivo.append("conteudo", this.artigo.conteudo);
-        arquivo.append("nomeAutor", this.artigo.nomeAutor);
+        arquivo.append("nomeAutor", this.dadosLogin.author);
         this.cadastrarArtigo(arquivo);
         this.mostrar = true;
         this.limparCampos();
@@ -143,10 +128,9 @@ export default {
 
       e.preventDefault();
     },
-
-    // imagemSelecionada(event) {
-    //   this.imgArtigo = event.target.files;
-    // },
+  },
+  computed: {
+    ...mapState(["dadosLogin"]),
   },
 };
 </script>

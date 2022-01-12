@@ -77,7 +77,8 @@ module.exports = class UsuarioController {
                     expiresIn: '1h'
                 })
 
-                return res.status(200).send(token)
+                // return res.status(200).send(token)
+                return res.status(200).send({ message: "Bem-vindo(a)", author: usuario.nome, token: token, status: 200 })
             }
             return res.status(401).send("Login e/ou sennha errados. Não Autorizado!")
         })

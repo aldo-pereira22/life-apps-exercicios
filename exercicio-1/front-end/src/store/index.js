@@ -17,7 +17,7 @@ export default new Vuex.Store({
   state: {
     artigos: [],
     artigo: [],
-    logado: true,
+    dadosLogin: "",
     usuario: []
   },
 
@@ -51,7 +51,14 @@ export default new Vuex.Store({
     },
     testeLogar(state, payload) {
       state.logado = payload
+    },
+    login(state, payload) {
+      state.dadosLogin = payload
+    },
+    logout(state) {
+      state.dadosLogin = ""
     }
+
 
 
   },
@@ -97,8 +104,16 @@ export default new Vuex.Store({
         // return(resp.data)
       })
     },
-    testeLogar(context, payload) {
-      context.commit('testeLogar', payload)
+
+    login(context, payload) {
+      axios.post('http://localhost:3001/usuario/login', payload).then((resp) => {
+        console.log(resp.data)
+        context.commit('login', resp.data)
+      })
+
+    },
+    logout(context) {
+      context.commit('logout')
     },
 
   },

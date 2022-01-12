@@ -8,6 +8,7 @@
         <label for="exampleInputEmail1">E-mail</label>
         <input
           type="email"
+          v-model="email"
           class="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
@@ -18,10 +19,12 @@
         <label for="exampleInputPassword1">Senha</label>
         <input
           type="password"
+          v-model="senha"
           class="form-control"
           id="exampleInputPassword1"
           placeholder="senha"
         />
+        <div></div>
       </div>
       <div class="card-footer">
         <button type="submit" v-on:click="logar" class="btn btn-primary mt-2">
@@ -33,7 +36,32 @@
 </template>
 
 <script>
-export default {};
+import { mapActions, mapState } from "vuex";
+export default {
+  data() {
+    return {
+      email: "",
+      senha: "",
+    };
+  },
+  methods: {
+    ...mapActions(["login"]),
+
+    logar(e) {
+      const dados = {
+        email: this.email,
+        senha: this.senha,
+      };
+      this.login(dados);
+      this.$router.push("/");
+
+      e.preventDefault();
+    },
+  },
+  computed: {
+    ...mapState(["dadosLogin"]),
+  },
+};
 </script>
 
 <style>

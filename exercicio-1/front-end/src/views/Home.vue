@@ -1,13 +1,11 @@
 <template>
   <div class="mt-5">
     <div v-if="this.artigos.length >= 1" class="text-center">
-      <router-link v-if="logado" :to="{ name: 'Cadastro' }">
+      <router-link :to="{ name: 'Cadastro' }">
         <button class="btn btn-success mr-3">Novo Artigo</button>
       </router-link>
     </div>
-    <button type="submit" v-on:click="mostrar()" class="btn btn-primary mt-2">
-      mostrar
-    </button>
+
     <!-- <h1>Artigos</h1> -->
 
     <!-- {{artigos}} -->
@@ -38,11 +36,18 @@
             </router-link>
 
             <!-- <router-link v-bind:to="{ name:'/atualizar', params:{ id:artigo.id }  } " > -->
-            <router-link :to="{ name: 'Atualizar', params: { id: artigo.id } }">
+            <router-link
+              v-if="dadosLogin"
+              :to="{ name: 'Atualizar', params: { id: artigo.id } }"
+            >
               <button class="btn btn-warning mr-3">Editar</button>
             </router-link>
 
-            <button v-on:click="deletar(artigo.id)" class="btn btn-danger">
+            <button
+              v-if="dadosLogin"
+              v-on:click="deletar(artigo.id)"
+              class="btn btn-danger"
+            >
               Excluir
             </button>
             <!-- <a  v-bind:href ="`http://localhost:3001/admin/excluir/${artigo.id}`" class="btn btn-danger mt-2">Excluir artigo </a> -->
@@ -54,9 +59,11 @@
       <div class="alert alert-primary" role="alert">
         Ainda não há Artigos cadastrados
       </div>
-      <router-link :to="{ name: 'Cadastro' }">
-        <button class="btn btn-primary mr-3">Cadastrar</button>
-      </router-link>
+      <div>
+        <router-link v-if="this.dadosLogin" :to="{ name: 'Cadastro' }">
+          <button class="btn btn-primary mr-3">Cadastrar</button>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -67,15 +74,10 @@ export default {
   name: "Home",
   components: {},
   data() {
-    return {
-      // logado: false,
-    };
+    return {};
   },
   methods: {
     ...mapActions(["listar", "excluir"]),
-    mostrar() {
-      this.$store.dispatch("testeLogar", false);
-    },
 
     async deletar(id) {
       try {
@@ -88,10 +90,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["artigos"]),
-    logado() {
-      return this.$store.state.logado;
-    },
+    ...mapState(["artigos", "dadosLogin"]),
   },
   created() {
     this.listar();
