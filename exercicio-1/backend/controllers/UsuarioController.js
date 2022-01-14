@@ -67,7 +67,7 @@ module.exports = class UsuarioController {
         }
         bcrypt.compare(senha, usuario.senha, (err, result) => {
             if (err) {
-                return res.status(401).send("Login e/ou sennha errados. Não Autorizado!")
+                return res.status(401).send({ message: "Não autorizado! Login e/ou senha" })
             }
             if (result) {
                 const token = jwt.sign({

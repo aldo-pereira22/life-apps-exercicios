@@ -57,6 +57,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.dadosLogin = ""
+    },
+    alterarArtigo(state, payload) {
+      state.artigo = payload
     }
 
 
@@ -66,6 +69,9 @@ export default new Vuex.Store({
 
   actions: {
     // Artigos
+    alterarArtigo(context, payload) {
+      context.commit('alterarArtigo', payload)
+    },
     listar(context) {
       axios.get('http://localhost:3001').then(resp => {
         console.log(resp.data)
@@ -107,7 +113,7 @@ export default new Vuex.Store({
 
     login(context, payload) {
       axios.post('http://localhost:3001/usuario/login', payload).then((resp) => {
-        console.log(resp.data)
+
         context.commit('login', resp.data)
       })
 

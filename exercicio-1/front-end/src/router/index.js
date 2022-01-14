@@ -45,6 +45,11 @@ const routes = [
     name: 'CadastrarUsuario',
     component: () => import('../components/Usuarios/cadastro/Cadastro')
   },
+  {
+    path: '/teste',
+    name: 'Teste',
+    component: () => import('../components/teste/Teste.vue')
+  },
 
 
 ]

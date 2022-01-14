@@ -54,6 +54,7 @@ export default {
       };
       this.login(dados);
       this.$router.push("/");
+      console.log("TESTE: " + this.dadosLogin);
 
       e.preventDefault();
     },

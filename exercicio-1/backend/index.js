@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const conn = require('./db/conn')
 const cors = require('cors');
+const io = require('socket.io')
 
 
 // Models
@@ -16,6 +17,7 @@ const usuarioRotas = require('./router/usuarioRotas')
 // Configurações
 // Receber dados JSON
 app.use(express.json())
+// app.use(io)
 
 
 // Tornando acessível a pasta Uploads
