@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
 
     cadastrarArtigo(state, payload) {
+      state.artigos = payload
+    },
+    cadastrarArtigoComSocket(state, payload) {
       state.artigos = payload
     },
 
@@ -84,6 +88,9 @@ export default new Vuex.Store({
         context.commit('cadastrarArtigo', resp.data)
         // return(resp.data)
       })
+    },
+    cadastrarArtigoComSocket() {
+
     },
 
     excluir(context, id) {

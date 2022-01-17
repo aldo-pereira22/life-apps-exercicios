@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5">
-    <div v-if="this.artigos.length >= 1" class="text-center">
+    <div v-if="this.artigos.length >= 1 && dadosLogin" class="text-center">
       <router-link :to="{ name: 'Cadastro' }">
         <button class="btn btn-success mr-3">Novo Artigo</button>
       </router-link>

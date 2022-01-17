@@ -1,15 +1,13 @@
 <template>
   <div>
     <h1>Página de TESTE</h1>
-    {{ this.artigo }}
-    {{ this.artigo1 }}
 
     <button
       type="button"
       v-on:click="alterar"
       class="btn btn-primary btn-sm mt-5"
     >
-      Alterar State
+      Teste com WebSocket
     </button>
   </div>
 </template>
@@ -28,7 +26,7 @@ export default {
   },
   methods: {
     ...mapActions(["alterarArtigo"]),
-    alterar() {
+    teste() {
       console.log(this.artigo1.titulo);
       this.alterarArtigo(this.artigo);
     },

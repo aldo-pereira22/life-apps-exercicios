@@ -1,6 +1,6 @@
 
 var admin = require("firebase-admin");
-var serviceAccount = require("1_1/firebase.json");
+var serviceAccount = require("1/firebase.json");
 const { set } = require("../../db/conn");
 
 const BUCKET = 'exercicio1-lifeapps.appspot.com'
