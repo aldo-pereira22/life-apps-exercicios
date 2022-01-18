@@ -2,11 +2,7 @@
   <div>
     <h1>Página de TESTE</h1>
 
-    <button
-      type="button"
-      v-on:click="alterar"
-      class="btn btn-primary btn-sm mt-5"
-    >
+    <button type="button" class="btn btn-primary btn-sm mt-5">
       Teste com WebSocket
     </button>
   </div>
