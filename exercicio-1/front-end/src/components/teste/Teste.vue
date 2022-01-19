@@ -22,13 +22,23 @@ export default {
   },
   methods: {
     ...mapActions(["alterarArtigo"]),
-    teste() {
-      console.log(this.artigo1.titulo);
-      this.alterarArtigo(this.artigo);
-    },
   },
   computed: {
     ...mapState(["artigo"]),
+  },
+  mounted() {
+    // this.$sockets.on("teste", (data) => {
+    //   console.log(data);
+    // });
+    this.sockets.subscribe("teste", (data) => {
+      console.log(data);
+    });
+    this.sockets.unsubscribe("connection", () => {
+      console.log("TESTE DO");
+    });
+
+    // this.sockets.unsubscribe("message", "Mesagem do front-end!");
+    // console.log("TESTE!");
   },
 };
 </script>

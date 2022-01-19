@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import VueQuillEditor from 'vue-quill-editor';
 import VueSocketIO from 'vue-socket.io'
+
 Vue.use(new VueSocketIO({
   debug: true,
   // connection: 'http://metinseylan.com:1992',

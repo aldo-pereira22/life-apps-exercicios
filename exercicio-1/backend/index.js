@@ -3,19 +3,11 @@ const app = express()
 const http = require('http').createServer(app)
 const conn = require('./db/conn')
 const cors = require('cors');
-// const { Server } = require("socket.io");
-// const io = new Server(server);
-// const io = require('socket.io')(http, {
-//     cors: {
-//         origins: ['http://localhost:8080'],
-//         // origins: ['*']
-//     }
-// });
 
 const io = require('socket.io')(http, {
     cors: {
         origin: "http://localhost:8080",
-        methods: ["GET", "POST"],
+        methods: ["GET", "POST", "UPDATE", "DELETE"],
         transports: ['websocket', 'polling'],
         credentials: true
     },
@@ -42,7 +34,7 @@ app.use(express.json())
 app.use('/', express.static('./uploads'))
 
 //Cors
-// app.use(cors());
+app.use(cors());
 // app.use(cors({ credentials: true, origin: 'http://localhost:8080' }));
 
 // URL ENCODE
@@ -78,6 +70,15 @@ conn.sync().
         http.listen(porta)
     }).catch((err) => console.log(err))
 
+
+
 io.on('connection', (socket) => {
-    console.log('\n\n\nWeb Socket Conectado!!!: ' + socket.id + "Visitas: " + ++visitas)
+    console.log('\n\n\ cliente Socket.io Conectado!!!: ' + socket.id + "Quantidade de visitas: " + ++visitas + "\n\n")
+
+    socket.on("disconnect", () => {
+        console.log("\n\n\n Cliente desconectado! " + socket.id)
+    })
+
+    socket.emit("teste", "Olá, sou uma mensagem do backend!!!!!!");
+
 })

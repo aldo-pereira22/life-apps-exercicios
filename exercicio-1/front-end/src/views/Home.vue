@@ -84,6 +84,7 @@ export default {
         await this.excluir(id);
         this.listar();
         this.$router.go();
+        // this.$router.push("/");
       } catch (error) {
         alert("Nao foi possivel excluir" + error);
       }

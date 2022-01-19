@@ -1,6 +1,6 @@
 const Artigo = require('../model/Artigo')
 var admin = require("firebase-admin");
-
+const io = require('socket.io')
 
 
 module.exports = class AdminController {
@@ -70,6 +70,8 @@ module.exports = class AdminController {
         artigoEditado.imagem ? artigo.imagem = artigoEditado.imagem : null
         const id = artigo.id
         await Artigo.update(artigo, { where: { id: id } })
+
+        io.emit("adm", "Olá Teste Do ADMCONTROLLER!")
 
         res.status(200).send()
     }
