@@ -2,6 +2,7 @@
   <div class="login">
     <form class="card">
       <div class="card-header">
+        <!-- <h1>TOKEN: {{ this.dadosLogin.token }}</h1> -->
         <h2>Login</h2>
       </div>
       <div class="form-group">
@@ -47,14 +48,18 @@ export default {
   methods: {
     ...mapActions(["login"]),
 
-    logar(e) {
+    logar() {
       const dados = {
         email: this.email,
         senha: this.senha,
       };
+
       this.login(dados);
+      // this.$router.push();
+      this.$forceUpdate();
       this.$router.push("/");
-      e.preventDefault();
+
+      // e.preventDefault();
     },
   },
   computed: {

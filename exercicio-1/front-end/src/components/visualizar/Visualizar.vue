@@ -30,6 +30,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import io from "socket.io-client";
 
 export default {
   data() {
@@ -44,7 +45,13 @@ export default {
   computed: {
     ...mapState(["artigo"]),
   },
+  mounted() {
+    this.socket.on("teste", (data) => {
+      console.log("Dados" + data);
+    });
+  },
   created() {
+    this.socket = io("http://localhost:3000");
     this.buscarArtigo(this.$route.params.id);
   },
 };

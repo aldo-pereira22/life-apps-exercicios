@@ -1,9 +1,9 @@
 <template>
   <div class="menu">
     <div class="warning">
-      <div v-if="dadosLogin" class="alert alert-primary" role="alert">
-        {{ dadosLogin.message }}
-        {{ dadosLogin.author }}
+      <div v-if="dadosLogin.nome" class="alert alert-primary" role="alert">
+        <!-- {{ dadosLogin.message }} -->
+        {{ this.dadosLogin.nome }}
       </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

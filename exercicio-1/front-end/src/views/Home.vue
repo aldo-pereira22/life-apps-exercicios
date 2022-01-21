@@ -60,7 +60,7 @@
         Ainda não há Artigos cadastrados
       </div>
       <div>
-        <router-link v-if="this.dadosLogin" :to="{ name: 'Cadastro' }">
+        <router-link v-if="this.dadosLogin.nome" :to="{ name: 'Cadastro' }">
           <button class="btn btn-primary mr-3">Cadastrar</button>
         </router-link>
       </div>

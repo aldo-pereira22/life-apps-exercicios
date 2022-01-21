@@ -30,9 +30,11 @@ export default {
     // this.$sockets.on("teste", (data) => {
     //   console.log(data);
     // });
+
     this.sockets.subscribe("teste", (data) => {
       console.log(data);
     });
+
     this.sockets.unsubscribe("connection", () => {
       console.log("TESTE DO");
     });

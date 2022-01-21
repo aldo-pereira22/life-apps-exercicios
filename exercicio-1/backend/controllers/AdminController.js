@@ -1,6 +1,6 @@
 const Artigo = require('../model/Artigo')
 var admin = require("firebase-admin");
-const io = require('socket.io')
+const socketio = require('../websocket/index');
 
 
 module.exports = class AdminController {
@@ -11,6 +11,7 @@ module.exports = class AdminController {
             artigoNovo.imagem = req.file.firebaseUrl
 
         } catch (error) {
+            io
             console.log("Não foi possível salvar a imagem" + error)
         }
         const artigo = await Artigo.create(artigoNovo)
@@ -29,7 +30,7 @@ module.exports = class AdminController {
                 { hour: 'numeric', minute: 'numeric', timeZoneName: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(artigo.createdAt))
 
             console.log("\n\n\nDATA: " + artigo.updatedAt + "\n\n\n")
-
+            // io.emit("adm", "Mensagem do controller ADM")
             res.status(200).send(artigo)
         } catch (error) {
             console.log("\n\n\n\n\n\nERRRROOOO!")
@@ -69,9 +70,10 @@ module.exports = class AdminController {
         artigo.nomeAutor = artigoEditado.nomeAutor
         artigoEditado.imagem ? artigo.imagem = artigoEditado.imagem : null
         const id = artigo.id
+        socketio.io.emit("teste", artigo);
         await Artigo.update(artigo, { where: { id: id } })
 
-        io.emit("adm", "Olá Teste Do ADMCONTROLLER!")
+
 
         res.status(200).send()
     }

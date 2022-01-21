@@ -18,7 +18,10 @@ export default new Vuex.Store({
   state: {
     artigos: [],
     artigo: [],
-    dadosLogin: "",
+    dadosLogin: {
+      nome: localStorage.getItem("autor"),
+      token: localStorage.getItem("token")
+    },
     usuario: []
   },
 
@@ -61,6 +64,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.dadosLogin = ""
+      localStorage.removeItem('token');
+      localStorage.removeItem('autor');
+
     },
     alterarArtigo(state, payload) {
       state.artigo = payload
@@ -120,8 +126,12 @@ export default new Vuex.Store({
 
     login(context, payload) {
       axios.post('http://localhost:3001/usuario/login', payload).then((resp) => {
+        // localStorage.setItem("autor", resp.data.author);
+        localStorage.setItem("token", resp.data.token);
+        localStorage.setItem("autor", resp.data.author);
 
-        context.commit('login', resp.data)
+        // context.commit('login', resp.data)
+        console.log(resp)
       })
 
     },

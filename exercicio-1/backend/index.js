@@ -3,16 +3,8 @@ const app = express()
 const http = require('http').createServer(app)
 const conn = require('./db/conn')
 const cors = require('cors');
-
-const io = require('socket.io')(http, {
-    cors: {
-        origin: "http://localhost:8080",
-        methods: ["GET", "POST", "UPDATE", "DELETE"],
-        transports: ['websocket', 'polling'],
-        credentials: true
-    },
-    allowEIO3: true
-});
+const socketio = require('./websocket/index')
+socketio.run(app)
 
 // Models
 const Artigo = require('./model/Artigo')
@@ -61,7 +53,15 @@ app.use((error, req, res, next) => {
     })
 })
 
-let visitas = 0;
+// io.on('connection', function (socket) {
+//     console.log("Conectado com sucesso! ID: " + socket.id)
+//     socket.emit("teste", "TESTE DO BACKEND!");
+// });
+
+function getSocketIo() {
+    return io;
+}
+
 const porta = 3001
 conn.sync().
     // conn.sync({ force: true }).
@@ -70,15 +70,4 @@ conn.sync().
         http.listen(porta)
     }).catch((err) => console.log(err))
 
-
-
-io.on('connection', (socket) => {
-    console.log('\n\n\ cliente Socket.io Conectado!!!: ' + socket.id + "Quantidade de visitas: " + ++visitas + "\n\n")
-
-    socket.on("disconnect", () => {
-        console.log("\n\n\n Cliente desconectado! " + socket.id)
-    })
-
-    socket.emit("teste", "Olá, sou uma mensagem do backend!!!!!!");
-
-})
+// module.exports.getSocketIo = getSocketIo
