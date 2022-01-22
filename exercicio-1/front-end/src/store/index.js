@@ -130,6 +130,7 @@ export default new Vuex.Store({
         localStorage.setItem("token", resp.data.token);
         localStorage.setItem("autor", resp.data.author);
 
+
         // context.commit('login', resp.data)
         console.log(resp)
       })

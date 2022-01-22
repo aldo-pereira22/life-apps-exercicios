@@ -46,9 +46,9 @@ const routes = [
     component: () => import('../components/Usuarios/cadastro/Cadastro')
   },
   {
-    path: '/teste',
-    name: 'Teste',
-    component: () => import('../components/teste/Teste.vue')
+    path: '/erro',
+    name: 'Erro',
+    component: () => import('../components/erro/pagina_erro.vue')
   },
 
 

@@ -48,7 +48,7 @@ export default {
   methods: {
     ...mapActions(["login"]),
 
-    logar() {
+    logar(e) {
       const dados = {
         email: this.email,
         senha: this.senha,
@@ -59,7 +59,7 @@ export default {
       this.$forceUpdate();
       this.$router.push("/");
 
-      // e.preventDefault();
+      e.preventDefault();
     },
   },
   computed: {

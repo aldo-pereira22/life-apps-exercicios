@@ -51,6 +51,7 @@ module.exports = class AdminController {
             await Artigo.destroy({ where: { id: id } })
             const bucket = admin.storage().bucket();
             bucket.deleteFiles({ prefix: artigo.imagem.split('/').pop() })
+            socketio.info().emit("excluido", artigo);
             res.status(202).send("Artigo excluido!")
         } else {
             res.status(404).send("Não foi possível excluir!\nO artigo não foi encontrado ncontrado!")
@@ -70,7 +71,9 @@ module.exports = class AdminController {
         artigo.nomeAutor = artigoEditado.nomeAutor
         artigoEditado.imagem ? artigo.imagem = artigoEditado.imagem : null
         const id = artigo.id
-        socketio.io.emit("teste", artigo);
+        socketio.info().emit("editado", artigo);
+        // socketio.info().emit("teste", JSON.stringify(artigo));
+
         await Artigo.update(artigo, { where: { id: id } })
 
 

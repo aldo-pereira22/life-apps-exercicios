@@ -117,7 +117,7 @@ export default {
         arquivo.append("imagem", this.imagemSelecionada);
         arquivo.append("titulo", this.artigo.titulo);
         arquivo.append("conteudo", this.artigo.conteudo);
-        arquivo.append("nomeAutor", this.dadosLogin.author);
+        arquivo.append("nomeAutor", this.dadosLogin.nome);
         this.cadastrarArtigo(arquivo);
         this.mostrar = true;
         this.limparCampos();

@@ -21,10 +21,13 @@
           {{ artigo.conteudo }}
         </pre>
       </div>
+      <div>
+        <small>
+          <p><strong> Artigo atualizado em :</strong> {{ artigo.updatedAt }}</p>
+        </small>
+      </div>
       <hr />
     </div>
-
-    <p><strong> Atualizado em:</strong> {{ artigo.updatedAt }}</p>
   </div>
 </template>
 
@@ -35,6 +38,7 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
+      teste: "",
       id: this.$route.params.id,
     };
   },
@@ -46,11 +50,20 @@ export default {
     ...mapState(["artigo"]),
   },
   mounted() {
-    this.socket.on("teste", (data) => {
-      console.log("Dados" + data);
+    // this.teste = this.artigo;
+    this.socket.on("editado", (data) => {
+      this.buscarArtigo(this.$route.params.id);
+      this.teste = data;
+      console.log("Dados ID: " + data.id);
+    });
+    this.socket.on("excluido", (data) => {
+      console.log("EXCLUIDO", data.id == this.artigo.id);
+
+      if (data.id == this.artigo.id) this.$router.push("/Erro");
     });
   },
   created() {
+    this.teste = this.artigo;
     this.socket = io("http://localhost:3000");
     this.buscarArtigo(this.$route.params.id);
   },

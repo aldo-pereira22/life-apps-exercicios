@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5">
-    <div v-if="this.artigos.length >= 1 && dadosLogin" class="text-center">
+    <div v-if="this.artigos.length >= 1 && dadosLogin.nome" class="text-center">
       <router-link :to="{ name: 'Cadastro' }">
         <button class="btn btn-success mr-3">Novo Artigo</button>
       </router-link>
@@ -37,14 +37,14 @@
 
             <!-- <router-link v-bind:to="{ name:'/atualizar', params:{ id:artigo.id }  } " > -->
             <router-link
-              v-if="dadosLogin"
+              v-if="dadosLogin.nome"
               :to="{ name: 'Atualizar', params: { id: artigo.id } }"
             >
               <button class="btn btn-warning mr-3">Editar</button>
             </router-link>
 
             <button
-              v-if="dadosLogin"
+              v-if="dadosLogin.nome"
               v-on:click="deletar(artigo.id)"
               class="btn btn-danger"
             >

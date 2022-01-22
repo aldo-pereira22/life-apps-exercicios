@@ -7,6 +7,11 @@ exports.run = async (app) => {
         }
     });
     io.on('connection', (socket) => {
+        console.log("\n\nCliente socket conectado id: " + socket.id, "\n\n\n");
+
+        socket.on('disconnect', () => {
+            console.log("\n\nCliente socket Desconectado id: " + socket.id, "\n\n\n");
+        });
         exports.info = () => {
             return io;
         }

@@ -2,35 +2,40 @@
   <div class="menu">
     <div class="warning">
       <div v-if="dadosLogin.nome" class="alert alert-primary" role="alert">
-        <!-- {{ dadosLogin.message }} -->
-        {{ this.dadosLogin.nome }}
+        <small>
+          <strong>Logado como: </strong> {{ this.dadosLogin.nome }}
+        </small>
       </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <router-link class="nav-link" :to="{ name: 'Home' }">
-          <h3><img src="../assets/img/artigos.jpg" alt="" /></h3>
+          <h3><img src="../assets/img/life.png" alt="" /></h3>
         </router-link>
         <router-link class="nav-link" :to="{ name: 'Home' }">
           <h3>INICIO</h3>
         </router-link>
         <div>
           <div>
-            <router-link v-if="!dadosLogin" :to="{ name: 'Login' }">
+            <router-link v-if="!dadosLogin.nome" :to="{ name: 'Login' }">
               <button type="button" class="btn btn-primary btn-sm mt-5">
                 Login
               </button>
             </router-link>
           </div>
           <div>
-            <router-link v-if="!dadosLogin" :to="{ name: 'CadastrarUsuario' }"
+            <router-link
+              v-if="!dadosLogin.nome"
+              :to="{ name: 'CadastrarUsuario' }"
               ><button type="button" class="btn btn-success btn-sm">
                 Registrar
               </button></router-link
             >
           </div>
           <div>
-            <router-link v-if="dadosLogin" :to="{ name: 'CadastrarUsuario' }"
+            <router-link
+              v-if="dadosLogin.nome"
+              :to="{ name: 'CadastrarUsuario' }"
               ><button
                 v-on:click="sair"
                 type="button"
@@ -75,7 +80,7 @@ export default {
 
 <style  scoped>
 img {
-  width: 100px;
-  border-radius: 89px;
+  /* width: 100px;
+  border-radius: 89px; */
 }
 </style>
