@@ -18,16 +18,18 @@
     <div class="alert alert-primary" role="alert" v-if="mostrar">
       Artigo atualizado com sucesso!
     </div>
-    <div>
+    <div class="container">
       <form class="mt-5">
         <div class="form-group">
-          <img
-            id="img"
-            v-if="artigo.imagem"
-            :src="artigo.imagem"
-            class="card-img-top"
-            alt="Imagem do artigo"
-          />
+          <div class="img">
+            <img
+              id="img"
+              v-if="artigo.imagem"
+              :src="artigo.imagem"
+              class="card-img-top"
+              alt="Imagem do artigo"
+            />
+          </div>
 
           <label for="img">Escolha a imagem</label> <br />
           <input
@@ -112,6 +114,7 @@ export default {
       this.artigo.titulo = "";
       this.artigo.conteudo = "";
       this.artigo.nomeAutor = "";
+      this.imagemSelecionada = null;
       document.querySelector("#img").value = null;
     },
     selecionarImagem(e) {
@@ -147,6 +150,8 @@ export default {
           this.mostrar = false;
         }, 4000);
         this.limparCampos();
+        this.erros = [];
+        this.buscarArtigo(this.$route.params.id);
       }
       e.preventDefault();
     },
@@ -162,7 +167,7 @@ export default {
 </script>
 
 <style>
-img {
+.img {
   width: 300px;
 }
 #id {

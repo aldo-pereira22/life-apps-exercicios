@@ -10,7 +10,7 @@
 
     <!-- {{artigos}} -->
 
-    <div v-if="this.artigos.length >= 1" class="">
+    <div v-if="this.artigos.length >= 1" class="container">
       <div v-for="artigo in artigos" :key="artigo.id">
         <div class="card" style="width: 18rem">
           <img
@@ -57,8 +57,9 @@
     </div>
     <div class="container" v-else>
       <div class="alert alert-primary" role="alert">
-        Ainda não há Artigos cadastrados
+        Ainda não há Artigos cadastrados <br />
       </div>
+      <br />
       <div>
         <router-link v-if="this.dadosLogin.nome" :to="{ name: 'Cadastro' }">
           <button class="btn btn-primary mr-3">Cadastrar</button>
@@ -109,5 +110,11 @@ export default {
 .card {
   margin-top: 20px;
   margin-left: 20px;
+}
+.container {
+  display: flex;
+}
+.container img {
+  width: 300px;
 }
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <div class="main">
-    <h2>Cadastrar Artigo</h2>
-
+  <div class="container">
     <form class="mt-5" enctype="multipart/form-data">
       <div class="warning" v-if="erros.length">
         <div class="alert alert-primary" role="alert">

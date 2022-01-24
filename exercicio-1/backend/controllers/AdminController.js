@@ -51,7 +51,9 @@ module.exports = class AdminController {
             await Artigo.destroy({ where: { id: id } })
             const bucket = admin.storage().bucket();
             bucket.deleteFiles({ prefix: artigo.imagem.split('/').pop() })
+            // socketio.info().emit("excluido", artigo);
             socketio.info().emit("excluido", artigo);
+
             res.status(202).send("Artigo excluido!")
         } else {
             res.status(404).send("Não foi possível excluir!\nO artigo não foi encontrado ncontrado!")

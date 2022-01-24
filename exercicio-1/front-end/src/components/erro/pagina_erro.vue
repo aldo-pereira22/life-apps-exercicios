@@ -4,11 +4,11 @@
       <h3>Atenção! O artigo que vc estava lendo foi excluído!</h3>
       <br />
       Voltar para todos os artigos. <br />
-      <!-- <div>
+      <div>
         <router-link :to="{ name: 'Home' }">
-          <button class="btn btn-primary mr-3">Cadastrar</button>
+          <button class="btn btn-primary mr-3">Inicio</button>
         </router-link>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
