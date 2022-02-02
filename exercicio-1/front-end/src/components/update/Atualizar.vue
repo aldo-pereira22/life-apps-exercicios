@@ -40,7 +40,7 @@
             id="img"
           />
         </div>
-
+        <!-- 
         <div class="form-group mt-3">
           <label for="titulo">Nome do autor </label>
           <input
@@ -51,7 +51,7 @@
             name="autor"
             placeholder="Digite o título do artigo"
           />
-        </div>
+        </div> -->
 
         <div class="form-group mt-3">
           <label for="titulo">Título do artigo</label>
@@ -138,7 +138,7 @@ export default {
         let arquivo = new FormData();
         arquivo.append("titulo", this.artigo.titulo);
         arquivo.append("conteudo", this.artigo.conteudo);
-        arquivo.append("nomeAutor", this.artigo.nomeAutor);
+        // arquivo.append("nomeAutor", this.artigo.nomeAutor);
         arquivo.append("id", this.artigo.id);
         this.imagemSelecionada
           ? arquivo.append("imagem", this.imagemSelecionada)

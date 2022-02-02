@@ -15,6 +15,7 @@ module.exports = class AdminController {
             console.log("Não foi possível salvar a imagem" + error)
         }
         const artigo = await Artigo.create(artigoNovo)
+
         res.status(201).send(artigo)
     }
     static async buscar(req, res) {

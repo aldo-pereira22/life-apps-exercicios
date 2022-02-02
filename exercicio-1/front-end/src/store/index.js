@@ -120,7 +120,7 @@ export default new Vuex.Store({
     cadastrarUsuario(context, payload) {
       axios.post('http://localhost:3001/usuario/cadastrar', payload).then((resp) => {
         context.commit('cadastrarUsuario', resp.data)
-        // return(resp.data)
+        console.log(resp.data)
       })
     },
 

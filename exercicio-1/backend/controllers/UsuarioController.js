@@ -13,6 +13,7 @@ module.exports = class UsuarioController {
             }
             novoUsuario.senha = hash
             const usuario = await Usuario.create(req.body)
+            console.log("\n\n\n\n\n" + usuario.nome)
             res.status(201).send(usuario)
         })
     }
