@@ -42,17 +42,19 @@ const io = socketIo(server)
 const teste = [[10], [10]];
 teste[0][0] = 1
 
-// for (i = 0; i < 9; i++) {
-//     for (j = 0; j < 9; j++) {
-//         teste[i][j] = i + j
+console.log(teste)
+// for (i = 0; teste.length; i++) {
+//     for (j = 0; j < teste[j].length; j++) {
+//         // teste[i][j] = i + j
 //     }
 // }
+// console.log(teste)
 // io.on('connection', (socket) => {
 io.on('connect', (socket) => {
 
     console.log("Cliente conectado, id: " + socket.id)
-    console.log("Matriz " + teste[0][0])
-    socket.emit("teste", teste.length)
+    socket.emit("teste", "Mensagem do servidor")
+    // console.log(socket.client)
     socket.on('disconnect', () => {
         console.log("Cliente desconectado, id: " + socket.id)
     })
