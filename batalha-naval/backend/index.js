@@ -38,26 +38,44 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server)
 
+// Import dos campos de batalha
+const array = require('./funcoes/array')
+const campo1 = array.campo1
+const campo2 = array.campo2
 
-const teste = [[10], [10]];
-teste[0][0] = 1
+console.log("\n\n\nCampo de Batalha - 1")
+console.table(campo1)
 
-console.log(teste)
-// for (i = 0; teste.length; i++) {
-//     for (j = 0; j < teste[j].length; j++) {
-//         // teste[i][j] = i + j
+
+// for (i = 0; i < 10; i++) {
+//     for (j = 0; j < 10; j++) {
+//         campo1[5][5] = "AAAA"
 //     }
 // }
-// console.log(teste)
-// io.on('connection', (socket) => {
+// let cont = 0;
+// for (i = 0; i < 10; i++) {
+//     for (j = 0; j < 10; j++) {
+//         cont++;
+
+//         campo1[i][j] = cont
+//     }
+// }
+
+console.log("\n\nCampo de Batalha - 2")
+console.table(campo2)
+
+
 io.on('connect', (socket) => {
 
     console.log("Cliente conectado, id: " + socket.id)
     socket.emit("teste", "Mensagem do servidor")
     // console.log(socket.client)
     socket.on('disconnect', () => {
-        console.log("Cliente desconectado, id: " + socket.id)
+        console.log("\n\nCliente desconectado, id: " + socket.id)
     })
+    socket.emit("campo1", campo1)
+    socket.emit("campo2", campo2)
+
 })
 
 

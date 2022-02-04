@@ -1,7 +1,30 @@
 <template>
   <div id="app">
+    <h1>Batalha Naval</h1>
     <div class="container">
-      <h1>Batalha Naval</h1>
+      <h2>Player - 1</h2>
+      <div class="teste">
+        <div v-for="(item, index) in campo1" :key="index">
+          <div v-for="(i, indice) in item" :key="indice" class="teste">
+            <div>
+              <div v-on:click="atacar(indice, index)" class="celula">
+                {{ i }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="teste">
+        <div v-for="(item, index) in campo2" :key="index">
+          <div v-for="(i, index) in item" :key="index" class="teste">
+            <div>
+              <div class="celula">{{ i }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Player - 2</h2>
     </div>
   </div>
 </template>
@@ -11,12 +34,14 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
-      campo1: [10][10],
-      campo2: [10][10],
+      campo1: {},
+      campo2: {},
     };
   },
   methods: {
-    preencherCampo1() {},
+    atacar(posicaoX, posicaoY) {
+      alert("ATACOU: linha: " + posicaoX + " - Coluna " + posicaoY);
+    },
   },
   computed: {},
 
@@ -27,8 +52,18 @@ export default {
       console.log("Conectado com o servidor");
     });
 
-    this.socket.on("teste", (teste) => {
-      console.log(teste);
+    this.socket.on("campo1", (campo1) => {
+      // this.campo1.push(campo1);
+      this.campo1 = campo1;
+      console.log("\n\n\ncampo de batalha - 1");
+      console.log(this.campo1);
+    });
+
+    this.socket.on("campo2", (campo2) => {
+      // this.campo2.push(campo2);
+      this.campo2 = campo2;
+      console.log("\n\n\ncampo de batalha - 2");
+      console.log(this.campo2);
     });
   },
 };
@@ -81,5 +116,22 @@ export default {
 }
 .main {
   display: flex;
+}
+
+.teste {
+  /* background-color: blue; */
+  margin: 0 auto;
+  display: flex;
+}
+.container {
+  display: flex;
+  margin: 5px;
+}
+.celula {
+  background-color: blueviolet;
+  cursor: pointer;
+  border: solid 1px;
+  width: 50px;
+  height: 25px;
 }
 </style>
