@@ -6,26 +6,44 @@
       <div class="teste">
         <div v-for="(item, index) in campo1" :key="index">
           <div v-for="(i, indice) in item" :key="indice" class="teste">
-            <div>
-              <div v-on:click="atacar(indice, index)" class="celula">
-                {{ i }}
-              </div>
+            <div
+              v-for="valor in 10"
+              :key="valor"
+              class="celula"
+              v-on:click="selecionar(indice, valor - 1)"
+              :id="retornoID(indice, valor - 1)"
+            >
+              {{ i[valor - 1] }}
             </div>
           </div>
         </div>
       </div>
-      <hr />
-      <div class="teste">
+      <!-- <div class="teste">
         <div v-for="(item, index) in campo2" :key="index">
-          <div v-for="(i, index) in item" :key="index" class="teste">
-            <div>
-              <div class="celula">{{ i }}</div>
+          <div v-for="(i, indice) in item" :key="indice" class="teste">
+            <div
+              v-for="valor in 10"
+              :key="valor"
+              class="celula"
+              v-on:click="selecionar(indice, valor - 1)"
+              :id="retornoID(indice, valor - 1)"
+            >
+              {{ i[valor - 1] }}
             </div>
           </div>
         </div>
+      </div> -->
+      <div>
+        <p v-on:click="tipoEmbarcao(5)">Porta-Aviões</p>
+        <p v-on:click="tipoEmbarcao(3)">Navio-tanque</p>
+        <p v-on:click="tipoEmbarcao(1)">Submarino</p>
+        <p v-on:click="tipoPosicao(1)">Horizontal</p>
+        <p v-on:click="tipoPosicao(2)">Vertical</p>
       </div>
-      <h2>Player - 2</h2>
     </div>
+    <hr />
+
+    <h2>Player - 2</h2>
   </div>
 </template>
 <script>
@@ -34,15 +52,43 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
-      campo1: {},
-      campo2: {},
+      barco: "",
+      posicao: "",
+      campo1: [],
+      campo2: [],
     };
   },
   methods: {
-    atacar(posicaoX, posicaoY) {
-      alert("ATACOU: linha: " + posicaoX + " - Coluna " + posicaoY);
+    selecionar(posicaoX, posicaoY) {
+      // alert("ATACOU: linha: " + posicaoX + " - Coluna " + posicaoY);
+      let tamanhoGridX = Number(posicaoY) + this.barco - 1;
+      let tamanhoGridY = Number(posicaoX) + this.barco - 1;
+
+      if (this.posicao == 1) {
+        if (tamanhoGridX > 9) return console.log("Passou do tabuleiro");
+        for (let i = 0; i < this.barco; i++) {
+          document.getElementById(`${posicaoX}${posicaoY + i}`).className =
+            "selecionado";
+        }
+      } else {
+        if (tamanhoGridY > 9) return console.log("Passou do tabuleiro");
+        for (let i = 0; i < this.barco; i++) {
+          document.getElementById(`${posicaoX + i}${posicaoY}`).className =
+            "selecionado";
+        }
+      }
+    },
+    tipoEmbarcao(tipo) {
+      this.barco = tipo;
+    },
+    retornoID(indice, valor) {
+      return `${indice}${valor}`;
+    },
+    tipoPosicao(posicao) {
+      this.posicao = posicao;
     },
   },
+
   computed: {},
 
   created() {
@@ -54,14 +100,14 @@ export default {
 
     this.socket.on("campo1", (campo1) => {
       // this.campo1.push(campo1);
-      this.campo1 = campo1;
+      this.campo1.push(campo1);
       console.log("\n\n\ncampo de batalha - 1");
       console.log(this.campo1);
     });
 
     this.socket.on("campo2", (campo2) => {
       // this.campo2.push(campo2);
-      this.campo2 = campo2;
+      this.campo2.push(campo2);
       console.log("\n\n\ncampo de batalha - 2");
       console.log(this.campo2);
     });
@@ -131,6 +177,12 @@ export default {
   background-color: blueviolet;
   cursor: pointer;
   border: solid 1px;
+  width: 50px;
+  height: 25px;
+}
+.selecionado {
+  background-color: rgb(25, 0, 252);
+  cursor: no-drop;
   width: 50px;
   height: 25px;
 }
