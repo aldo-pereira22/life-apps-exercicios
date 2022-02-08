@@ -4,9 +4,12 @@
     <div class="container">
       <h2>Player - 1</h2>
       <div class="teste">
-        <div v-for="(item, index) in campo1" :key="index">
+        <div v-for="(item, index) in this.campo1" :key="index">
           <div v-for="(i, indice) in item" :key="indice" class="teste">
-            <div
+            <div class="celula" v-on:click="selecionar(index, indice)">
+              {{ i }}
+            </div>
+            <!-- <div
               v-for="valor in 10"
               :key="valor"
               class="celula"
@@ -14,31 +17,43 @@
               :id="retornoID(indice, valor - 1)"
             >
               {{ i[valor - 1] }}
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
-      <!-- <div class="teste">
-        <div v-for="(item, index) in campo2" :key="index">
-          <div v-for="(i, indice) in item" :key="indice" class="teste">
-            <div
-              v-for="valor in 10"
-              :key="valor"
-              class="celula"
-              v-on:click="selecionar(indice, valor - 1)"
-              :id="retornoID(indice, valor - 1)"
-            >
-              {{ i[valor - 1] }}
-            </div>
-          </div>
-        </div>
-      </div> -->
+
       <div>
-        <p v-on:click="tipoEmbarcao(5)">Porta-Aviões</p>
-        <p v-on:click="tipoEmbarcao(3)">Navio-tanque</p>
-        <p v-on:click="tipoEmbarcao(1)">Submarino</p>
-        <p v-on:click="tipoPosicao(1)">Horizontal</p>
-        <p v-on:click="tipoPosicao(2)">Vertical</p>
+        <div class="aa">
+          <p v-on:click="tipoEmbarcao(5)">Porta-Aviões:</p>
+          <br />
+          <div class="a">1</div>
+          <div class="a">2</div>
+          <div class="a">3</div>
+          <div class="a">4</div>
+          <div class="a">5</div>
+        </div>
+        <div class="aa">
+          <p v-on:click="tipoEmbarcao(3)">Navio-tanque</p>
+          <div class="a">1</div>
+          <div class="a">2</div>
+          <div class="a">3</div>
+        </div>
+        <div class="aa">
+          <p v-on:click="tipoEmbarcao(1)">Submarino</p>
+          <div class="a">1</div>
+        </div>
+        <div class="aa">
+          <p v-on:click="tipoPosicao(1)">Horizontal</p>
+          <div class="a">1</div>
+          <div class="a">2</div>
+          <div class="a">3</div>
+        </div>
+        <div class="">
+          <p v-on:click="tipoPosicao(2)">Vertical</p>
+          <div class="a">1</div>
+          <div class="a">2</div>
+          <div class="a">3</div>
+        </div>
       </div>
     </div>
     <hr />
@@ -52,6 +67,7 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
+      socket: this.socket,
       barco: "",
       posicao: "",
       campo1: [],
@@ -60,23 +76,40 @@ export default {
   },
   methods: {
     selecionar(posicaoX, posicaoY) {
-      // alert("ATACOU: linha: " + posicaoX + " - Coluna " + posicaoY);
-      let tamanhoGridX = Number(posicaoY) + this.barco - 1;
-      let tamanhoGridY = Number(posicaoX) + this.barco - 1;
+      console.log("Posição - X " + posicaoX, " Posição - Y" + posicaoY);
+      if (this.barco == 5) this.campo1[posicaoX][posicaoY] = "Avião";
+      if (this.barco == 3) this.campo1[posicaoX][posicaoY] = "Navio";
+      if (this.barco == 1) this.campo1[posicaoX][posicaoY] = "Sub";
 
-      if (this.posicao == 1) {
-        if (tamanhoGridX > 9) return console.log("Passou do tabuleiro");
-        for (let i = 0; i < this.barco; i++) {
-          document.getElementById(`${posicaoX}${posicaoY + i}`).className =
-            "selecionado";
-        }
-      } else {
-        if (tamanhoGridY > 9) return console.log("Passou do tabuleiro");
-        for (let i = 0; i < this.barco; i++) {
-          document.getElementById(`${posicaoX + i}${posicaoY}`).className =
-            "selecionado";
-        }
-      }
+      console.log(this.campo1[posicaoY][posicaoX]);
+      this.enviarBackEnd(this.campo1);
+      this.receberBackEnd();
+      // this.testeIo();
+      // this.campo1[posicaoX][posicaoX] = " P";
+      // console.log(this.campo1);
+      // this.campo1[posicaoX][posicaoY] = "CLIQUE";
+
+      // alert("Posição - X: " + posicaoX + " - Posição - Y " + posicaoY);
+      // let tamanhoGridX = Number(posicaoY) + this.barco - 1;
+      // let tamanhoGridY = Number(posicaoX) + this.barco - 1;
+      // console.log(tamanhoGridY);
+      // if (this.posicao == 1) {
+      //   alert(this.posicao);
+      //   if (tamanhoGridX > 9) return console.log("Passou do tabuleiro");
+      //   for (let i = 0; i < this.barco; i++) {
+      //     document.getElementById(`${posicaoX}${posicaoY + i}`).className =
+      //       "selecionado";
+      //   }
+      // } else if (this.posicao == 2) {
+      //   alert(this.posicao);
+      //   if (tamanhoGridY > 9) return console.log("Passou do tabuleiro");
+      //   for (let i = 0; i < this.barco; i++) {
+      //     document.getElementById(`${posicaoX + i}${posicaoY}`).className =
+      //       "selecionado";
+      //   }
+      // } else {
+      //   alert("Selecione uma posição!");
+      // }
     },
     tipoEmbarcao(tipo) {
       this.barco = tipo;
@@ -87,20 +120,29 @@ export default {
     tipoPosicao(posicao) {
       this.posicao = posicao;
     },
+    enviarBackEnd(array) {
+      this.socket.emit("atualizar", array);
+    },
+    receberBackEnd() {
+      this.socket.on("recebe", (array) => {
+        this.campo1 = array;
+      });
+    },
   },
 
   computed: {},
 
   created() {
     this.socket = io("http://localhost:3000");
-
+    // this.socket.emit("teste" + this.campo1);
     this.socket.on("connect", () => {
       console.log("Conectado com o servidor");
     });
 
     this.socket.on("campo1", (campo1) => {
       // this.campo1.push(campo1);
-      this.campo1.push(campo1);
+      // this.campo1.push(campo1);
+      this.campo1 = campo1;
       console.log("\n\n\ncampo de batalha - 1");
       console.log(this.campo1);
     });
@@ -123,7 +165,16 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
+.a {
+  background-color: chartreuse;
+  border: solid 1px black;
+  width: 20px;
+  height: 20px;
+}
+.aa {
+  display: flex;
+  flex-direction: row;
+}
 #nav {
   padding: 30px;
 }
@@ -177,8 +228,8 @@ export default {
   background-color: blueviolet;
   cursor: pointer;
   border: solid 1px;
-  width: 50px;
-  height: 25px;
+  width: 90px;
+  height: 45px;
 }
 .selecionado {
   background-color: rgb(25, 0, 252);

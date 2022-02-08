@@ -40,8 +40,8 @@ const io = socketIo(server)
 
 // Import dos campos de batalha
 const array = require('./funcoes/array')
-const campo1 = array.campo1
-const campo2 = array.campo2
+let campo1 = array.campo1
+let campo2 = array.campo2
 
 console.log("\n\n\nCampo de Batalha - 1")
 
@@ -88,6 +88,14 @@ io.on('connect', (socket) => {
     socket.on('disconnect', () => {
         console.log("\n\nCliente desconectado, id: " + socket.id)
     })
+    socket.on("atualizar", (array) => {
+        console.log("Recebendo dados do front-end")
+        console.table(array)
+        campo1 = array
+        socket.emit("recebe", campo1)
+
+    })
+
     socket.emit("campo1", campo1)
     socket.emit("campo2", campo2)
 
