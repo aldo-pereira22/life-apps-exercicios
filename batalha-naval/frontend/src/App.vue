@@ -6,7 +6,11 @@
       <div class="teste">
         <div v-for="(item, index) in this.campo1" :key="index">
           <div v-for="(i, indice) in item" :key="indice" class="teste">
-            <div class="celula" v-on:click="selecionar(index, indice)">
+            <div
+              class="celula"
+              :id="retornoID(index, indice)"
+              v-on:click="selecionar(index, indice)"
+            >
               {{ i }}
             </div>
             <!-- <div
@@ -72,44 +76,60 @@ export default {
       posicao: "",
       campo1: [],
       campo2: [],
+      quantidadeEmbarcacao: 0,
     };
   },
   methods: {
     selecionar(posicaoX, posicaoY) {
       console.log("Posição - X " + posicaoX, " Posição - Y" + posicaoY);
-      if (this.barco == 5) this.campo1[posicaoX][posicaoY] = "Avião";
-      if (this.barco == 3) this.campo1[posicaoX][posicaoY] = "Navio";
-      if (this.barco == 1) this.campo1[posicaoX][posicaoY] = "Sub";
+
+      if (!this.barco) {
+        alert("Selecione o tipo de embarcação!");
+        return;
+      }
+      if (!this.posicao) {
+        alert("Selecione a posição da embarcação!");
+        return;
+      }
+      if (this.campo1[posicaoX][posicaoY] != 0) {
+        alert("Posição ocupada!");
+        return;
+      }
+      if (this.quantidadeEmbarcacao == 6) {
+        alert("Limite de embarcação!");
+        return;
+      }
+
+      // if (this.barco == 5) this.campo1[posicaoX][posicaoY] = "Avião";
+      // if (this.barco == 3) this.campo1[posicaoX][posicaoY] = "Navio";
+      // if (this.barco == 1) this.campo1[posicaoX][posicaoY] = "Sub";
 
       console.log(this.campo1[posicaoY][posicaoX]);
       this.enviarBackEnd(this.campo1);
       this.receberBackEnd();
-      // this.testeIo();
-      // this.campo1[posicaoX][posicaoX] = " P";
-      // console.log(this.campo1);
-      // this.campo1[posicaoX][posicaoY] = "CLIQUE";
 
       // alert("Posição - X: " + posicaoX + " - Posição - Y " + posicaoY);
-      // let tamanhoGridX = Number(posicaoY) + this.barco - 1;
-      // let tamanhoGridY = Number(posicaoX) + this.barco - 1;
-      // console.log(tamanhoGridY);
-      // if (this.posicao == 1) {
-      //   alert(this.posicao);
-      //   if (tamanhoGridX > 9) return console.log("Passou do tabuleiro");
-      //   for (let i = 0; i < this.barco; i++) {
-      //     document.getElementById(`${posicaoX}${posicaoY + i}`).className =
-      //       "selecionado";
-      //   }
-      // } else if (this.posicao == 2) {
-      //   alert(this.posicao);
-      //   if (tamanhoGridY > 9) return console.log("Passou do tabuleiro");
-      //   for (let i = 0; i < this.barco; i++) {
-      //     document.getElementById(`${posicaoX + i}${posicaoY}`).className =
-      //       "selecionado";
-      //   }
-      // } else {
-      //   alert("Selecione uma posição!");
-      // }
+
+      let tamanhoGridX = Number(posicaoY) + this.barco - 1;
+      let tamanhoGridY = Number(posicaoX) + this.barco - 1;
+      console.log(tamanhoGridY);
+      if (this.posicao == 1) {
+        alert(this.posicao);
+        if (tamanhoGridX > 9) return console.log("Passou do tabuleiro");
+        for (let i = 0; i < this.barco; i++) {
+          document.getElementById(`${posicaoY + i}${posicaoX}`).className =
+            "selecionado";
+        }
+      } else if (this.posicao == 2) {
+        alert(this.posicao);
+        if (tamanhoGridY > 9) return console.log("Passou do tabuleiro");
+        for (let i = 0; i < this.barco; i++) {
+          document.getElementById(`${posicaoY}${posicaoX + i}`).className =
+            "selecionado";
+        }
+      } else {
+        alert("Selecione uma posição!");
+      }
     },
     tipoEmbarcao(tipo) {
       this.barco = tipo;
@@ -234,7 +254,8 @@ export default {
 .selecionado {
   background-color: rgb(25, 0, 252);
   cursor: no-drop;
-  width: 50px;
-  height: 25px;
+  border: solid 1px;
+  width: 90px;
+  height: 45px;
 }
 </style>

@@ -46,17 +46,17 @@ let campo2 = array.campo2
 console.log("\n\n\nCampo de Batalha - 1")
 
 
-campo1[0][0] = "NAVIO"
-campo1[0][1] = "NAVIO"
-campo1[0][2] = "NAVIO"
-campo1[0][3] = "NAVIO"
-campo1[0][4] = "NAVIO"
+// campo1[0][0] = "NAVIO"
+// campo1[0][1] = "NAVIO"
+// campo1[0][2] = "NAVIO"
+// campo1[0][3] = "NAVIO"
+// campo1[0][4] = "NAVIO"
 
-campo2[0][0] = "Avião"
-campo2[0][1] = "Avião"
-campo2[0][2] = "Avião"
-campo2[0][3] = "Avião"
-campo2[0][4] = "Avião"
+// campo2[0][0] = "Avião"
+// campo2[0][1] = "Avião"
+// campo2[0][2] = "Avião"
+// campo2[0][3] = "Avião"
+// campo2[0][4] = "Avião"
 
 
 
