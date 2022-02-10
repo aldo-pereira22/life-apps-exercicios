@@ -81,7 +81,6 @@ console.table(campo2)
 
 
 io.on('connect', (socket) => {
-
     console.log("Cliente conectado, id: " + socket.id)
     socket.emit("teste", "Mensagem do servidor")
     // console.log(socket.client)

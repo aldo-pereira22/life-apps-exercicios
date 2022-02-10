@@ -60,6 +60,7 @@
         </div>
       </div>
     </div>
+    <button id="botaoIniciar" class="iniciarPartida">Iniciar partida</button>
     <hr />
 
     <h2>Player - 2</h2>
@@ -77,10 +78,38 @@ export default {
       campo1: [],
       campo2: [],
       quantidadeEmbarcacao: 0,
+      qtdAvioes: 0,
+      qtdSubmarinos: 0,
+      qtdNavios: 0,
     };
   },
   methods: {
+    mostrarBotaoInicio() {
+      if (this.quantidadeEmbarcacao == 6)
+        document.querySelector("#botaoIniciar").style.display = "inline-block";
+    },
     selecionar(posicaoX, posicaoY) {
+      //      this.qtdAvioes == 2 ||
+      // this.qtdNavios == 3 ||
+      // this.qtdSubmarinos == 4
+      if (this.quantidadeEmbarcacao >= 6) {
+        alert("Excedeu o limite de embarcações");
+        return;
+      }
+      if (this.qtdSubmarinos == 4 && this.barco == 1) {
+        alert("Excedeu a quantidade de Submarinos! Coloque outra embarcação");
+        return;
+      }
+      if (this.qtdNavios == 3 && this.barco == 3) {
+        alert("Excedeu a quantidade de Navios! Coloque outra embarcação");
+        return;
+      }
+
+      if (this.qtdAvioes == 2 && this.barco == 5) {
+        alert("Excedeu a quantidade de Porta Aviões! Coloque outra embarcação");
+        return;
+      }
+
       console.log("Posição - X " + posicaoX, " Posição - Y" + posicaoY);
 
       if (!this.barco) {
@@ -91,14 +120,10 @@ export default {
         alert("Selecione a posição da embarcação!");
         return;
       }
-      if (this.campo1[posicaoY][posicaoX] != 0) {
-        alert("Posição ocupada!");
-        return;
-      }
-      if (this.quantidadeEmbarcacao == 6) {
-        alert("Limite de embarcação!");
-        return;
-      }
+      // if (this.campo1[posicaoY][posicaoX] != 0) {
+      //   alert("Posição ocupada!");
+      //   return;
+      // }
 
       console.log(this.campo1[posicaoY][posicaoX]);
       this.enviarBackEnd(this.campo1);
@@ -115,39 +140,66 @@ export default {
         alert(this.posicao);
         if (tamanhoGridX > 10) {
           alert(tamanhoGridX);
-          alert("Passou do tabuleiro");
+          alert("A embarcação não cabe nessa posição!");
           return;
         }
         for (let i = 0; i < this.barco; i++) {
-          if (this.barco == 5) this.campo1[posicaoY + i][posicaoX] = "Avião";
-          if (this.barco == 3) this.campo1[posicaoY + i][posicaoX] = "Navio";
-          if (this.barco == 1) this.campo1[posicaoY + i][posicaoX] = "Sub";
-
+          if (this.campo1[posicaoY + i][posicaoX] != 0) {
+            alert("Posição ocupada!");
+            return;
+          }
+        }
+        for (let i = 0; i < this.barco; i++) {
+          if (this.barco == 5) {
+            this.campo1[posicaoY + i][posicaoX] = "Avião";
+          }
+          if (this.barco == 3) {
+            this.campo1[posicaoY + i][posicaoX] = "Navio";
+          }
+          if (this.barco == 1) {
+            this.campo1[posicaoY + i][posicaoX] = "Sub";
+          }
           document.getElementById(`${posicaoY + i}${posicaoX}`).className =
             "selecionado";
         }
+        if (this.barco == 1) this.qtdSubmarinos++;
+        if (this.barco == 3) this.qtdNavios++;
+        if (this.barco == 5) this.qtdAvioes++;
+        this.quantidadeEmbarcacao++;
+        alert("QUANTIDADE DE EMBARCAÇÕES!!! " + this.quantidadeEmbarcacao);
       } else if (this.posicao == 2) {
         alert(this.posicao);
         if (tamanhoGridY > 10) {
           alert(tamanhoGridY);
-
-          alert("Passou do tabuleiro!");
+          alert("A embarcação não cabe nessa posição!");
           return;
         }
         for (let i = 0; i < this.barco; i++) {
-          if (this.barco == 5) this.campo1[posicaoY][posicaoX + 1] = "Avião";
-          if (this.barco == 3) this.campo1[posicaoY][posicaoX + 1] = "Navio";
-          if (this.barco == 1) this.campo1[posicaoY][posicaoX + 1] = "Sub";
-
+          if (this.campo1[posicaoY][posicaoX + i] != 0) {
+            alert("Posição ocupada!");
+            return;
+          }
+        }
+        for (let i = 0; i < this.barco; i++) {
+          if (this.barco == 5) this.campo1[posicaoY][posicaoX + i] = "Avião";
+          if (this.barco == 3) this.campo1[posicaoY][posicaoX + i] = "Navio";
+          if (this.barco == 1) this.campo1[posicaoY][posicaoX + i] = "Sub";
           document.getElementById(`${posicaoY}${posicaoX + i}`).className =
             "selecionado";
         }
+        this.quantidadeEmbarcacao++;
+        alert("QUANTIDADE DE EMBARCAÇÕES!!! " + this.quantidadeEmbarcacao);
+        if (this.barco == 1) this.qtdSubmarinos++;
+        if (this.barco == 3) this.qtdNavios++;
+        if (this.barco == 5) this.qtdAvioes++;
       } else {
         alert("Selecione uma posição!");
       }
       this.enviarBackEnd(this.campo1);
       this.receberBackEnd();
+      this.mostrarBotaoInicio();
     },
+
     tipoEmbarcao(tipo) {
       this.barco = tipo;
     },
@@ -274,5 +326,11 @@ export default {
   border: solid 1px;
   width: 90px;
   height: 45px;
+}
+.iniciarPartida {
+  background-color: green;
+  border-radius: 7px;
+  color: white;
+  display: none;
 }
 </style>
