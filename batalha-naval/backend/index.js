@@ -40,8 +40,8 @@ const io = socketIo(server)
 
 // Import dos campos de batalha
 const array = require('./funcoes/array')
-let campo1 = array.campo1
-let campo2 = array.campo2
+// let campo1 = array.campo1
+// let campo2 = array.campo2
 
 console.log("\n\n\nCampo de Batalha - 1")
 
@@ -75,12 +75,14 @@ console.log("\n\n\nCampo de Batalha - 1")
 //     }
 // }
 
-console.log("\n\nCampo de Batalha - 2")
-console.table(campo1)
-console.table(campo2)
+// console.log("\n\nCampo de Batalha - 2")
+// console.table(campo1)
+// console.table(campo2)
 
 
 io.on('connect', (socket) => {
+    let campo1 = array.campo1
+    let campo2 = array.campo2
     console.log("Cliente conectado, id: " + socket.id)
     socket.emit("teste", "Mensagem do servidor")
     // console.log(socket.client)
@@ -94,7 +96,6 @@ io.on('connect', (socket) => {
         socket.emit("recebe", campo1)
 
     })
-
     socket.emit("campo1", campo1)
     socket.emit("campo2", campo2)
 

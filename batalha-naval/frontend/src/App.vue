@@ -110,7 +110,7 @@ export default {
         return;
       }
 
-      console.log("Posição - X " + posicaoX, " Posição - Y" + posicaoY);
+      // console.log("Posição - X " + posicaoX, " Posição - Y" + posicaoY);
 
       if (!this.barco) {
         alert("Selecione o tipo de embarcação!");
@@ -166,11 +166,11 @@ export default {
         if (this.barco == 3) this.qtdNavios++;
         if (this.barco == 5) this.qtdAvioes++;
         this.quantidadeEmbarcacao++;
-        alert("QUANTIDADE DE EMBARCAÇÕES!!! " + this.quantidadeEmbarcacao);
+        // alert("QUANTIDADE DE EMBARCAÇÕES!!! " + this.quantidadeEmbarcacao);
       } else if (this.posicao == 2) {
         alert(this.posicao);
         if (tamanhoGridY > 10) {
-          alert(tamanhoGridY);
+          // alert(tamanhoGridY);
           alert("A embarcação não cabe nessa posição!");
           return;
         }
@@ -184,11 +184,12 @@ export default {
           if (this.barco == 5) this.campo1[posicaoY][posicaoX + i] = "Avião";
           if (this.barco == 3) this.campo1[posicaoY][posicaoX + i] = "Navio";
           if (this.barco == 1) this.campo1[posicaoY][posicaoX + i] = "Sub";
+
           document.getElementById(`${posicaoY}${posicaoX + i}`).className =
             "selecionado";
         }
         this.quantidadeEmbarcacao++;
-        alert("QUANTIDADE DE EMBARCAÇÕES!!! " + this.quantidadeEmbarcacao);
+        // alert("QUANTIDADE DE EMBARCAÇÕES!!! " + this.quantidadeEmbarcacao);
         if (this.barco == 1) this.qtdSubmarinos++;
         if (this.barco == 3) this.qtdNavios++;
         if (this.barco == 5) this.qtdAvioes++;
