@@ -1,13 +1,21 @@
-
 const express = require('express')
 const app = express()
 const http = require('http').createServer(app)
 const cors = require('cors');
+require('dotenv').config()
 
+
+
+app.use(cors());
 const axios = require('axios')
 
 app.get("/", (req, resp) => {
-    resp.json("TESTE")
+    // resp.json("TESTE")
+    axios.get('http://192.168.0.4/redmine/projects.json').then(dados => {
+        resp.json(dados.data.projects)
+        console.log(dados.data)
+        // return dados.data
+    })
 })
 // axios.get('192.168.0.4/redmine/issues.json')
 //     .then(resp => {
@@ -39,6 +47,5 @@ app.get("/", (req, resp) => {
 //     // console.log(resp.data.issues[0].project.name)
 //     console.log(resp.data)
 // })
-
 const porta = 3001
 http.listen(porta)
