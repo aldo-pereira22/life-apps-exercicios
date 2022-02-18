@@ -4,19 +4,22 @@ const http = require('http').createServer(app)
 const cors = require('cors');
 require('dotenv').config()
 
+const redmineRotas = require('./router/routerRedmine')
 
 
 app.use(cors());
-const axios = require('axios')
 
-app.get("/", (req, resp) => {
-    // resp.json("TESTE")
-    axios.get('http://192.168.0.4/redmine/projects.json').then(dados => {
-        resp.json(dados.data.projects)
-        console.log(dados.data)
-        // return dados.data
-    })
-})
+app.use('/', redmineRotas)
+// const axios = require('axios')
+
+// app.get("/", (req, resp) => {
+//     // resp.json("TESTE")
+//     axios.get('http://192.168.0.4/redmine/projects.json').then(dados => {
+//         resp.json(dados.data.projects)
+//         console.log(dados.data)
+//         // return dados.data
+//     })
+// })
 // axios.get('192.168.0.4/redmine/issues.json')
 //     .then(resp => {
 //         dados = resp.data
