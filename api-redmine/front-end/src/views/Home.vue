@@ -1,30 +1,32 @@
 <template>
   <div class="container">
     <h1>Página Home</h1>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Pesquise um projeto"
-              aria-label="Search"
-              v-model="nome"
-            />
-            <button
-              class="btn btn-outline-success"
-              type="submit"
-              v-on:click.prevent.stop="pesquisar()"
-            >
-              Pesquisar
-            </button>
-          </form>
-          <p></p>
+    <div id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Pesquise um projeto"
+                aria-label="Search"
+                v-model="nome"
+              />
+              <button
+                class="btn btn-outline-success"
+                type="submit"
+                v-on:click.prevent.stop="pesquisar()"
+              >
+                Pesquisar
+              </button>
+            </form>
+            <p></p>
+          </div>
         </div>
-      </div>
-      <br />
-    </nav>
+        <br />
+      </nav>
+    </div>
 
     <div>
       <!-- {{ projetoPesquisado[0].name }} -->
@@ -51,7 +53,7 @@
         </div>
       </div>
     </div>
-    <div v-else>Não foi encontrado Projeto com este nome</div>
+    <div v-else>Não foi encontrado nenhum projeto com este nome</div>
   </div>
 </template>
 
