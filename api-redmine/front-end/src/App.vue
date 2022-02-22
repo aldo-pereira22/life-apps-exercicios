@@ -1,4 +1,5 @@
 <template>
+  <div class="banner">LifeApps</div>
   <div class="container">
     <div id="nav">
       <!-- <router-link class="navbar-brand" to="/about">Projetos</router-link> -->
@@ -7,6 +8,8 @@
         <div class="container-fluid">
           <router-link class="navbar-brand" to="/">Inicio</router-link>
           <router-link class="navbar-brand" to="/about">Projetos</router-link>
+          <router-link class="navbar-brand" to="/issues">Issues</router-link>
+
           <div
             class="collapse navbar-collapse"
             id="navbarSupportedContent"
@@ -41,5 +44,14 @@ body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.banner {
+  text-align: center;
+  font-size: 60px;
+  color: whitesmoke;
+  background-color: #2c3e50;
+  width: 100%;
+  /* height: 180px; */
+  /* position: absolute; */
 }
 </style>

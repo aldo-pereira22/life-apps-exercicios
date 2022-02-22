@@ -1,14 +1,19 @@
 const axios = require("axios")
 const url = "http://192.168.0.4/redmine/"
 
+const projects = require('../data.js')
 
-
-exports.listarProjetos = async (req, res) => {
-    const resultado = await axios.get(url + "projects.json")
-    res.status(200).json(resultado.data.projects)
-    // res.status(200).json("Listar Projetos!")
+let i = 0
+// PROJETOS
+exports.listarProjetos = (req, res) => {
+    i++
+    // exports.listarProjetos = async (req, res) => {
+    // const projetos = await axios.get(url + "projects.json")
+    // res.status(200).json(projetos.data.projects)
+    console.log("\n\n\nAQUIIIIIII: " + i)
+    res.status(200).json(projects)
+    console.log(projects)
 }
-
 exports.buscarProjeto = async (req, res) => {
     const nomeDoProjeto = req.params.nomeDoProjeto
     const resultado = await axios.get(url + "projects.json")
@@ -34,5 +39,17 @@ exports.membrosProjeto = async (req, res) => {
     //     }
     // }
     res.status(200).json(id)
+}
+
+// ISSUES
+exports.listarIssues = async (req, res) => {
+
+    const issues = await axios.get(url + "issues.json")
+
+    console.log("ISSUES:::")
+    console.log(issues.data.issues)
+    // res.status(200).json(projetos.data.issues)
+    res.status(200).json(issues.data.issues)
+
 
 }

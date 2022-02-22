@@ -3,6 +3,7 @@ import axios from 'axios'
 export default createStore({
   state: {
     projetos: [],
+    issues: [],
     projetoPesquisado: ""
   },
   mutations: {
@@ -12,10 +13,19 @@ export default createStore({
     projetoPesquisado(state, payload) {
       state.projetoPesquisado = payload
     },
+
+    // Issues
+    issues(state, payload) {
+      state.issues = payload
+    },
   },
   actions: {
+
+    // PROJETOS
     listarProjetos(context) {
       axios.get('http://localhost:3001/projects').then(resp => {
+        console.log("DENTRO DO VUEX")
+        console.log(resp.data)
         context.commit('projetos', resp.data)
       })
     },
@@ -26,6 +36,17 @@ export default createStore({
         context.commit('projetoPesquisado', resp.data)
       })
     },
+
+
+    // ISSUES
+    listarIssues(context) {
+      axios.get('http://localhost:3001/issues').then(resp => {
+        console.log("lista de issues: ")
+        console.log(resp.data)
+        context.commit('issues', resp.data)
+      })
+    },
+
 
   },
   modules: {

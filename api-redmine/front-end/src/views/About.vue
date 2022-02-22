@@ -21,20 +21,13 @@
         </div>
       </div>
       {{ ativo }}
-      <div class="mt-4" v-for="projeto in projetos" :key="projeto.id">
-        <!-- {{ projeto }} -->
-        <div v-for="p in projeto" :key="p.id">
-          <h1>1</h1>
-          <br />
-          {{ p }}
-          <hr />
-          <h2>2</h2>
-          <br />
-          {{ projeto }}
-        </div>
+      <div class="mt-4" v-for="projeto in projetos.projects" :key="projeto.id">
         <div class="card">
           <h5 class="card-header">Projeto</h5>
           <div class="card-body">
+            <h1>
+              <!-- <h5 class="card-title">{{ projeto.id }}</h5> -->
+            </h1>
             <h5 class="card-title">{{ projeto.name }}</h5>
             <p class="card-text">
               {{ projeto.description }}
