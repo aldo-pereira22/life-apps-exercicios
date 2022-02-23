@@ -4,7 +4,13 @@
     <p>
       <strong>Filtrar por prioridade:</strong>
 
-      <select name="prioridade" id="" class="select" v-model="select">
+      <select
+        name="prioridade"
+        id=""
+        class="select"
+        v-model="select"
+        v-on:click="selecionar()"
+      >
         <option value="0" selected>Todas</option>
         <option value="1">Baixa</option>
         <option value="2">Normal</option>
@@ -43,6 +49,11 @@ export default {
       prioridade: "",
       select: "",
     };
+  },
+  methods: {
+    selecionar() {
+      alert("mudou");
+    },
   },
   computed: {
     ...mapState(["issues"]),

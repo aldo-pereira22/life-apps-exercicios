@@ -1,11 +1,7 @@
 <template>
   <div class="container">
     <h1>Projetos</h1>
-
     <div class="container">
-      <h1>
-        {{ this.box }}
-      </h1>
       <div class="filtros">
         <h3>Filtros</h3>
         <div class="form-check">
@@ -21,7 +17,7 @@
         </div>
       </div>
       {{ ativo }}
-      <div class="mt-4" v-for="projeto in projetos.projects" :key="projeto.id">
+      <div class="mt-4" v-for="projeto in projetos" :key="projeto.id">
         <div class="card">
           <h5 class="card-header">Projeto</h5>
           <div class="card-body">
@@ -48,7 +44,6 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      project: "",
       ativo: true,
     };
   },

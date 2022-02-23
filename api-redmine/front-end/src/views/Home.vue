@@ -12,6 +12,7 @@
                 placeholder="Pesquise um projeto"
                 aria-label="Search"
                 v-model="nome"
+                id="textPesquisar"
               />
               <button
                 class="btn btn-outline-success"
@@ -20,6 +21,14 @@
               >
                 Pesquisar
               </button>
+              &nbsp;&nbsp;&nbsp;
+              <button
+                class="btn btn-outline-success"
+                type="submit"
+                v-on:click.prevent.stop="limparPesquisa()"
+              >
+                Todos
+              </button>
             </form>
             <p></p>
           </div>
@@ -27,16 +36,6 @@
         <br />
       </nav>
     </div>
-
-    <div>
-      <!-- {{ projetoPesquisado[0].name }} -->
-    </div>
-    <!-- <p v-if="this.projetoPesquisado">
-      {{ this.projetoPesquisado[0].id }} <br />
-      {{ this.projetoPesquisado[0].name }}
-
-      <br />
-    </p> -->
     <div v-if="this.projetoPesquisado[0]" class="container">
       <div class="card">
         <h5 class="card-header">Projeto</h5>
@@ -53,7 +52,32 @@
         </div>
       </div>
     </div>
-    <div v-else>Não foi encontrado nenhum projeto com este nome</div>
+  </div>
+
+  <hr />
+
+  <div class="container" v-if="!this.projetoPesquisado">
+    <h1>Todos os projetos</h1>
+    <div class="container">
+      <div class="mt-4" v-for="projeto in projetos" :key="projeto.id">
+        <div class="card">
+          <h5 class="card-header">Projeto</h5>
+          <div class="card-body">
+            <h1>
+              <!-- <h5 class="card-title">{{ projeto.id }}</h5> -->
+            </h1>
+            <h5 class="card-title">{{ projeto.name }}</h5>
+            <p class="card-text">
+              {{ projeto.description }}
+            </p>
+            <p>
+              Data de criação: <strong>{{ projeto.created_on }}</strong>
+            </p>
+            <a href="#" class="btn btn-primary">Detalhes do projeto</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -66,17 +90,29 @@ export default {
   data() {
     return {
       nome: "",
+      teste: false,
     };
   },
   computed: {
-    ...mapState(["projetoPesquisado"]),
+    ...mapState(["projetoPesquisado", "projetos"]),
   },
   methods: {
-    ...mapActions(["pesquisarProjeto"]),
+    ...mapActions([
+      "pesquisarProjeto",
+      "listarProjetos",
+      "limparProjetoPesquisado",
+    ]),
     pesquisar() {
       this.pesquisarProjeto(this.nome);
     },
+    limparPesquisa() {
+      this.limparProjetoPesquisado();
+    },
   },
-  created() {},
+  created() {
+    this.listarProjetos();
+  },
 };
 </script>
+<style scoped>
+</style>

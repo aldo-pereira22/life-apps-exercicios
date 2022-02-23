@@ -11,6 +11,7 @@ export default createStore({
       state.projetos = payload
     },
     projetoPesquisado(state, payload) {
+
       state.projetoPesquisado = payload
     },
 
@@ -24,19 +25,26 @@ export default createStore({
     // PROJETOS
     listarProjetos(context) {
       axios.get('http://localhost:3001/projects').then(resp => {
-        console.log("DENTRO DO VUEX")
-        console.log(resp.data)
         context.commit('projetos', resp.data)
       })
     },
     pesquisarProjeto(context, nome) {
-      console.log("Nome Pesquisado: " + nome)
+
       axios.get('http://localhost:3001/buscarProjeto/' + nome).then(resp => {
-        console.log(resp.data)
+        // console.log(resp.data)
         context.commit('projetoPesquisado', resp.data)
+      }).catch((err) => {
+        console.log(err)
+        return err
       })
     },
 
+    limparProjetoPesquisado(context) {
+      context.commit('projetoPesquisado', "")
+    },
+    // filtrarProjeto(context, filtro) {
+
+    // },
 
     // ISSUES
     listarIssues(context) {

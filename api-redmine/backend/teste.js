@@ -1,4 +1,4 @@
 const projects = require('./data')
 
 
-console.log(projects)
+console.log(projects.issues)

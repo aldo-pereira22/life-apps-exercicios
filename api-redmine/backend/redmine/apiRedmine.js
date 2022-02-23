@@ -3,25 +3,35 @@ const url = "http://192.168.0.4/redmine/"
 
 const projects = require('../data.js')
 
-let i = 0
+
 // PROJETOS
-exports.listarProjetos = (req, res) => {
-    i++
-    // exports.listarProjetos = async (req, res) => {
-    // const projetos = await axios.get(url + "projects.json")
-    // res.status(200).json(projetos.data.projects)
-    console.log("\n\n\nAQUIIIIIII: " + i)
-    res.status(200).json(projects)
-    console.log(projects)
+exports.listarProjetos = async (req, res) => {
+    const projetos = await axios.get(url + "projects.json")
+
+
+    // ORDERNAR POR NOME
+    // projetos.data.projects.sort((a, b) => {
+    //     if (a.name < b.name) {
+    //         return -1
+    //     } else {
+    //         return true
+    //     }
+    // })
+
+    res.status(200).json(projetos.data.projects)
+
+    //UTILIZAR DADOS MOCADOS 
+    // res.status(200).json(projects.projects)
+    // console.log(projects)
 }
+
 exports.buscarProjeto = async (req, res) => {
     const nomeDoProjeto = req.params.nomeDoProjeto
     const resultado = await axios.get(url + "projects.json")
-    // console.log(resultado.data.projects)
-    // console.log(resultado.data.projects.filter(x => x.name == nomeDoProjeto))
+
 
     let result = resultado.data.projects.filter(x => x.name == nomeDoProjeto)
-    console.log(result)
+
     // console.log("URL: " + url + "projects.json?name=" + nomeDoProjeto)
     // res.status(200).json(await dadosArrumados(resultado.data))
     res.status(200).json(result)
@@ -40,16 +50,18 @@ exports.membrosProjeto = async (req, res) => {
     // }
     res.status(200).json(id)
 }
-
+exports.filtrarProjeto = async (req, res) => {
+    console.log(filtro)
+}
 // ISSUES
 exports.listarIssues = async (req, res) => {
 
-    const issues = await axios.get(url + "issues.json")
+    // const issues = await axios.get(url + "issues.json")
+    // console.log("ISSUES:::")
+    // console.log(issues.data.issues)
+    // res.status(200).json(issues.data.issues)
 
-    console.log("ISSUES:::")
-    console.log(issues.data.issues)
-    // res.status(200).json(projetos.data.issues)
-    res.status(200).json(issues.data.issues)
-
+    // Dados mocados
+    res.status(200).json(projects.issues)
 
 }
