@@ -13,4 +13,8 @@ router.get("/membros/:id", apiRedmine.membrosProjeto);
 // Issues
 router.get("/issues", apiRedmine.listarIssues);
 
+// Linha para fazer o teste!
+// router.get("/issues", apiRedmine.listarIssues);
+
+
 module.exports = router;
